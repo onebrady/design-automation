@@ -1,9 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { spawn, ChildProcess } from 'child_process'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   plugins: [
     react(),
     {
@@ -17,7 +23,7 @@ export default defineConfig({
           res.end(JSON.stringify({ running: isRunning(), pid: child?.pid || null }))
         })
 
-        server.middlewares.use('/manage/start', (_req, res) => {
+        server.middlewares.use('/manage/start', async (_req, res) => {
           if (!isRunning()) {
             child = spawn(process.execPath, ['apps/server/index.js'], {
               stdio: ['ignore','pipe','pipe'],
@@ -45,7 +51,7 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api': { target: 'http://localhost:3001', changeOrigin: true }
+      '/api': { target: 'http://localhost:8901', changeOrigin: true }
     }
   }
 })

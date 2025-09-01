@@ -10,7 +10,21 @@ export const api = {
   listBrandPacks: () => fetchJSON('/api/brand-packs'),
   createBrandPack: (payload: any) => fetchJSON('/api/brand-packs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
   getBrandPack: (id: string) => fetchJSON(`/api/brand-packs/${id}`),
+  deleteBrandPack: (id: string) => fetchJSON(`/api/brand-packs/${id}`, { method: 'DELETE' }),
   versionBrandPack: (id: string, payload: any) => fetchJSON(`/api/brand-packs/${id}/version`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+  generateBrandPackFromLogo: async (logoFile: File, brandName: string, description?: string) => {
+    const formData = new FormData();
+    formData.append('logo', logoFile);
+    formData.append('brandName', brandName);
+    if (description) formData.append('description', description);
+    
+    const res = await fetch('/api/brand-packs/generate-from-logo', {
+      method: 'POST',
+      body: formData
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return res.json();
+  },
   exportBrandJSON: (id: string) => fetchJSON(`/api/brand-packs/${id}/export/json`),
   lock: () => fetchJSON('/api/lock'),
   projectConfig: () => fetchJSON('/api/project-config'),
