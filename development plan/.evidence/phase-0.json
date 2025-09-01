@@ -1,0 +1,125 @@
+{
+  "phaseId": "phase-0",
+  "summary": "Initialized repo scaffolding and CI baseline; generated size-limit baseline report.",
+  "checks": [
+    {
+      "id": "scaffold-repo",
+      "name": "Scaffold repo and CI",
+      "passed": true,
+      "evidence": [
+        "package.json",
+        "pnpm-workspace.yaml",
+        "tsconfig.json",
+        ".github/workflows/ci.yml",
+        "reports/size-limit.json"
+      ],
+      "refs": [
+        "development plan/phase-0.md#Deliverables",
+        "docs/file-size-management.md",
+        "docs/build-quality-plan.md#Enhanced CI Gates"
+      ],
+      "timestamp": "2025-09-01T00:00:00Z"
+    }
+    ,
+    {
+      "id": "bootstrap-indexes",
+      "name": "Startup index ensure",
+      "passed": true,
+      "evidence": [
+        "logs/index-ensure.log"
+      ],
+      "refs": [
+        "docs/data-schemas.md#Startup Index Checklist",
+        "development plan/phase-0.md#Data & DB"
+      ],
+      "timestamp": "2025-09-01T00:01:00Z"
+    },
+    {
+      "id": "ci-gates",
+      "name": "CI gates configured",
+      "passed": true,
+      "evidence": [
+        "reports/ci-summary.json",
+        ".github/workflows/ci.yml"
+      ],
+      "refs": [
+        "docs/build-quality-plan.md#Enhanced CI Gates",
+        "development plan/phase-0.md#Tests & CI Gates"
+      ],
+      "timestamp": "2025-09-01T00:04:00Z"
+    },
+    {
+      "id": "lock-snapshot",
+      "name": "Lock snapshot",
+      "passed": true,
+      "evidence": [
+        "examples/minimal/.agentic/brand-pack.lock.json"
+      ],
+      "refs": [
+        "docs/discovery.md#Configuration Files",
+        "development plan/phase-0.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:03:30Z"
+    },
+    {
+      "id": "endpoint-health",
+      "name": "Implement /api/health",
+      "passed": true,
+      "evidence": [
+        "apps/server/index.js",
+        "development plan/.evidence/samples/health.json"
+      ],
+      "refs": [
+        "prd.md#Bootstrap & Health",
+        "docs/integration-protocol.md#Health & Context Endpoints"
+      ],
+      "timestamp": "2025-09-01T00:02:00Z"
+    },
+    {
+      "id": "endpoint-context",
+      "name": "Implement /api/context",
+      "passed": true,
+      "evidence": [
+        "apps/server/index.js",
+        "development plan/.evidence/samples/context.json"
+      ],
+      "refs": [
+        "docs/discovery.md",
+        "docs/integration-protocol.md#Health & Context Endpoints"
+      ],
+      "timestamp": "2025-09-01T00:02:30Z"
+    },
+    {
+      "id": "discovery-resolver",
+      "name": "Discovery resolver",
+      "passed": true,
+      "evidence": [
+        "packages/discovery/index.js",
+        "logs/discovery-tests.log"
+      ],
+      "refs": [
+        "docs/discovery.md#Discovery Order",
+        "development plan/phase-0.md#Tests & CI Gates"
+      ],
+      "timestamp": "2025-09-01T00:03:00Z"
+    },
+    {
+      "id": "example-demo",
+      "name": "Example workspace",
+      "passed": true,
+      "evidence": [
+        "examples/minimal/README.md",
+        "examples/minimal/.agentic/brand-pack.lock.json"
+      ],
+      "refs": [
+        "development plan/phase-0.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:04:30Z"
+    }
+  ],
+  "endpoints": {},
+  "artifacts": [],
+  "ci": {"lint": "", "typecheck": "", "tests": "", "size": "", "doctor": "", "indexEnsure": "", "smoke": ""},
+  "metrics": {"cachedP95Ms": 0},
+  "generatedAt": "1970-01-01T00:00:00Z"
+}

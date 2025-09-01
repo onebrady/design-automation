@@ -1,0 +1,8 @@
+{
+  "brandPack": { "id": "acme-brand", "version": "2.3.1", "source": "mongo" },
+  "projectId": "00000000-0000-4000-8000-000000000000",
+  "overrides": { "tokens": {} },
+  "mongoAvailable": true,
+  "degraded": false,
+  "lastSync": "2025-01-15T10:30:00Z"
+}

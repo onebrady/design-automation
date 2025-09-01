@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "changelog": [
+    "Phase 0–3: Foundations, brand packs, deterministic engine, suggestions",
+    "Phase 4: SDK automation, plugin, integration",
+    "Phase 5: accuracy, caching, analytics, error recovery"
+  ],
+  "provenance": {
+    "build": "local-run",
+    "artifacts": [
+      "reports/ci-summary.json",
+      "reports/size-limit.json"
+    ]
+  }
+}

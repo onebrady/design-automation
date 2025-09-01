@@ -1,0 +1,12 @@
+{
+  "phaseId": "phase-3",
+  "tasks": [
+    {"id":"suggest-api","name":"Suggestions API","description":"Implement POST /api/design/suggest-proactive (advisory)","artifacts":["reports/api-contracts/suggest-proactive.json"],"ciJobs":["tests"],"refs":["docs/design-engine-spec.md#Pattern Learning & Intelligence","development plan/phase-3.md#Interfaces"]},
+    {"id":"learned-endpoint","name":"Learned patterns endpoint","description":"Implement GET /api/design/patterns/learned","artifacts":["reports/api-contracts/patterns-learned.json"],"ciJobs":["tests"],"refs":["development plan/phase-3.md#Interfaces"]},
+    {"id":"track-endpoint","name":"Tracking endpoint","description":"Implement POST /api/design/patterns/track","artifacts":["reports/api-contracts/patterns-track.json"],"ciJobs":["tests"],"refs":["development plan/phase-3.md#Interfaces"]},
+    {"id":"confidence-gating","name":"Confidence gating","description":"<0.8 suppress; 0.8–0.9 advisory; ≥0.9 eligible (still advisory for non-safe classes)","artifacts":["reports/confidence-gating.json"],"ciJobs":["tests"],"refs":["prd.md#Pattern Learning Scope (MVP → Beyond)"]},
+    {"id":"accuracy-eval","name":"Accuracy evaluation","description":"≥80% accuracy on fixtures; record precision/recall","artifacts":["reports/accuracy.json"],"ciJobs":["tests"],"refs":["docs/build-quality-plan.md#Enhanced CI Gates"]},
+    {"id":"latency-target","name":"Latency target","description":"Measure suggestions p95 <100ms","artifacts":["reports/perf-learning.json"],"ciJobs":["tests"],"refs":["docs/design-engine-spec.md#Performance Targets (Optimized)"]}
+  ]
+}
+

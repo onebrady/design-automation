@@ -1,0 +1,4 @@
+{
+  "request": { "componentType": "button", "event": "used" },
+  "response": { "status": 204 }
+}

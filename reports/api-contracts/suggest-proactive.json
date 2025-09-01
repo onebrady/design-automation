@@ -1,0 +1,13 @@
+{
+  "request": {
+    "code": ".btn{padding:16px 32px}",
+    "componentType": "button"
+  },
+  "response": {
+    "suggestions": [
+      { "type": "spacing-token", "target": "padding", "suggestedToken": "var(--spacing-md) var(--spacing-lg)", "confidence": 0.9 }
+    ],
+    "confidence": 0.9,
+    "basedOn": "heuristics"
+  }
+}

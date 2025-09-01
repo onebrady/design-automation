@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2025-09-01T02:35:09.512Z",
+  "report": [
+    {
+      "name": "color-token",
+      "changes": 1
+    },
+    {
+      "name": "spacing-pair",
+      "changes": 1
+    },
+    {
+      "name": "radius",
+      "changes": 1
+    },
+    {
+      "name": "elevation",
+      "changes": 1
+    }
+  ]
+}

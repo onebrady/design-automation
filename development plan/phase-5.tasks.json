@@ -1,0 +1,10 @@
+{
+  "phaseId": "phase-5",
+  "tasks": [
+    {"id":"accuracy-boost","name":"Accuracy improvements","description":">90% accuracy; feature weighting; feedback loop tuning","artifacts":["reports/accuracy-phase5.json"],"ciJobs":["tests"],"refs":["development plan/phase-5.md#Deliverables"]},
+    {"id":"advanced-cache","name":"Advanced caching","description":"Pre-warm, TTL/eviction, memory ceilings","artifacts":["reports/cache-status.json"],"ciJobs":["tests"],"refs":["development plan/phase-5.md#Deliverables"]},
+    {"id":"analytics","name":"Local analytics","description":"Usage rollups endpoint + JSON exports","artifacts":["snapshots/analytics.json"],"ciJobs":["tests"],"refs":["development plan/phase-5.md#Deliverables"]},
+    {"id":"error-recovery","name":"Error recovery","description":"Rollback, retries, diagnostics","artifacts":["logs/error-recovery-tests.log"],"ciJobs":["tests"],"refs":["development plan/phase-5.md#Deliverables"]},
+    {"id":"optional-auto-apply","name":"Optional expanded auto-apply","description":"Per-class thresholds; guardrails enforced","artifacts":["reports/auto-apply-phase5.json"],"ciJobs":["tests"],"refs":["docs/roadmap.md#Phase 5 — Intelligence & Optimization"]}
+  ]}
+

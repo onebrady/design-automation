@@ -1,0 +1,11 @@
+{
+  "phaseId": "phase-6",
+  "name": "Production Hardening",
+  "status": "done",
+  "owner": "Agent",
+  "start": "2025-09-01T00:27:00Z",
+  "completed": "2025-09-01T00:31:00Z",
+  "updatedAt": "2025-09-01T00:31:00Z",
+  "ciRunId": "local-run-0007",
+  "evidenceFile": "development plan/.evidence/phase-6.json"
+}

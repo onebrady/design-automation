@@ -1,0 +1,12 @@
+{
+  "brandPack": {
+    "id": "acme",
+    "name": "Acme",
+    "version": "1.0.0",
+    "description": "",
+    "tokens": {}
+  },
+  "tokens": {},
+  "analytics": {},
+  "patterns": {}
+}

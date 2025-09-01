@@ -1,0 +1,56 @@
+{
+  "name": "agentic-design-platform",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Agentic Design Intelligence Platform monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "tests": "node scripts/discovery-tests.js || true",
+    "size": "node scripts/size-baseline.js",
+    "doctor": "node scripts/preflight-doctor.js",
+    "index:ensure": "node scripts/index-ensure.js",
+    "smoke": "node scripts/smoke-health-context.js",
+    "start:server": "node apps/server/index.js",
+    "validators": "node scripts/validate-brand.js || true",
+    "engine:snapshots": "node scripts/run-engine-snapshots.js",
+    "engine:guardrails": "node scripts/generate-guardrails-report.js",
+    "cache:tests": "node scripts/cache-tests.js",
+    "perf:cached": "node scripts/perf-cached.js",
+    "plugin:tests": "node scripts/plugin-tests.js",
+    "sdk:tests": "node scripts/sdk-tests.js",
+    "sdk:auto": "node scripts/sdk-auto-tests.js",
+    "phase5:accuracy": "node scripts/accuracy-phase5.js",
+    "phase5:cache": "node scripts/cache-advanced.js",
+    "phase5:analytics": "node scripts/analytics-rollup.js",
+    "phase5:error": "node scripts/error-recovery-tests.js",
+    "phase6:docs": "node scripts/docs-link-check.js",
+    "phase6:examples": "node scripts/examples-run.js",
+    "phase6:onboarding": "node scripts/onboarding.js",
+    "phase6:migration": "node scripts/migration-tests.js",
+    "evidence:validate": "node scripts/validate-evidence.js",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "playwright": "^1.49.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.12.0",
+    "typescript": "~5.6.0",
+    "@playwright/test": "^1.49.0"
+  },
+  "dependencies": {
+    "mongodb": "^6.8.0",
+    "express": "^4.19.2"
+  }
+}

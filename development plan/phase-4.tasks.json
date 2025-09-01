@@ -1,0 +1,10 @@
+{
+  "phaseId": "phase-4",
+  "tasks": [
+    {"id":"sdk-auto","name":"SDK Level 3 automation","description":"Auto-resolve context; transparent enhance-cached; status events","artifacts":["reports/sdk-auto.json"],"ciJobs":["tests"],"refs":["development plan/phase-4.md#Deliverables"]},
+    {"id":"vscode-min","name":"VSCode extension (minimal)","description":"Opt-in background enhancement; status bar; toggle auto-apply","artifacts":["logs/vscode-ext.log","snapshots/extension-ui.png"],"ciJobs":["tests"],"refs":["development plan/phase-4.md#Deliverables"]},
+    {"id":"build-ci","name":"Build/CI integration","description":"Git hooks + CI steps; non-blocking unless strict","artifacts":["reports/ci-summary.json"],"ciJobs":["tests","smoke"],"refs":["docs/build-quality-plan.md#Intelligent Git Hooks"]},
+    {"id":"perf-bg","name":"Performance under background load","description":"Maintain cached p95 <100ms; hit rate >70%","artifacts":["reports/perf-bg.json"],"ciJobs":["tests"],"refs":["development plan/phase-4.md#Performance & Size Targets"]}
+  ]
+}
+

@@ -1,0 +1,8 @@
+{
+  "gating": {
+    "suppressedBelow": 0.8,
+    "advisoryRange": "0.8-0.9",
+    "eligibleAtOrAbove": 0.9,
+    "notes": "Eligible remains advisory for non-safe classes as per PRD"
+  }
+}

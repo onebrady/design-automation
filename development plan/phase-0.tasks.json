@@ -1,0 +1,69 @@
+{
+  "phaseId": "phase-0",
+  "tasks": [
+    {
+      "id": "scaffold-repo",
+      "name": "Scaffold repo and CI",
+      "description": "Initialize pnpm workspaces, TS strict, CI skeleton, size-limit baselines",
+      "artifacts": ["reports/size-limit.json"],
+      "ciJobs": ["lint", "typecheck", "size"],
+      "refs": ["prd.md#Build Flow & Quality Gates", "docs/file-size-management.md", "development plan/phase-0.md#Deliverables"]
+    },
+    {
+      "id": "bootstrap-indexes",
+      "name": "Startup index ensure",
+      "description": "Create required Mongo indexes on startup and log results",
+      "artifacts": ["logs/index-ensure.log"],
+      "ciJobs": ["doctor", "indexEnsure"],
+      "refs": ["docs/data-schemas.md#Startup Index Checklist", "development plan/phase-0.md#Data & DB"]
+    },
+    {
+      "id": "endpoint-health",
+      "name": "Implement /api/health",
+      "description": "Expose service health with mongoAvailable and degraded",
+      "artifacts": ["development plan/.evidence/samples/health.json"],
+      "ciJobs": ["smoke"],
+      "refs": ["prd.md#Bootstrap & Health", "docs/integration-protocol.md#Health & Context Endpoints"]
+    },
+    {
+      "id": "endpoint-context",
+      "name": "Implement /api/context",
+      "description": "Expose brand/project context per discovery",
+      "artifacts": ["development plan/.evidence/samples/context.json"],
+      "ciJobs": ["smoke"],
+      "refs": ["docs/discovery.md", "docs/integration-protocol.md#Health & Context Endpoints"]
+    },
+    {
+      "id": "discovery-resolver",
+      "name": "Discovery resolver",
+      "description": "Resolve brand via env→config→package→marker→DB with auto-bind/degraded",
+      "artifacts": ["logs/discovery-tests.log"],
+      "ciJobs": ["tests"],
+      "refs": ["docs/discovery.md#Discovery Order", "development plan/phase-0.md#Tests & CI Gates"]
+    },
+    {
+      "id": "lock-snapshot",
+      "name": "Lock snapshot",
+      "description": "Generate .agentic/brand-pack.lock.json on bind/update",
+      "artifacts": ["examples/*/.agentic/brand-pack.lock.json"],
+      "ciJobs": ["tests"],
+      "refs": ["docs/discovery.md#Configuration Files", "development plan/phase-0.md#Deliverables"]
+    },
+    {
+      "id": "ci-gates",
+      "name": "CI gates configured",
+      "description": "Ensure lint/type/tests/size/doctor/index-ensure/smoke jobs",
+      "artifacts": ["reports/ci-summary.json"],
+      "ciJobs": ["lint", "typecheck", "tests", "size", "doctor", "indexEnsure", "smoke"],
+      "refs": ["docs/build-quality-plan.md#Enhanced CI Gates", "development plan/phase-0.md#Tests & CI Gates"]
+    },
+    {
+      "id": "example-demo",
+      "name": "Example workspace",
+      "description": "Example validates discovery + endpoints",
+      "artifacts": ["examples/*/README.md", "logs/example-run.log"],
+      "ciJobs": ["tests", "smoke"],
+      "refs": ["development plan/phase-0.md#Deliverables"]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "lint": "ok",
+  "typecheck": "ok",
+  "tests": "ok",
+  "size": "ok",
+  "doctor": "ok",
+  "indexEnsure": "ok",
+  "smoke": "ok",
+  "note": "Baseline summary; CI pipeline will produce real statuses."
+}

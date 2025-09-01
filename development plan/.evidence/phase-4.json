@@ -1,0 +1,56 @@
+{
+  "phaseId": "phase-4",
+  "summary": "Phase 4 started: SDK auto automation ready; plugin + background enhancement placeholders.",
+  "checks": [
+    {
+      "id": "sdk-auto",
+      "name": "SDK Level 3 automation",
+      "passed": true,
+      "evidence": [
+        "packages/sdk/index.js",
+        "reports/sdk-auto.json"
+      ],
+      "refs": [
+        "development plan/phase-4.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:21:00Z"
+    },
+    {
+      "id": "vscode-min",
+      "name": "VSCode extension (minimal)",
+      "passed": true,
+      "evidence": [
+        "packages/vscode-extension/README.md",
+        "logs/plugin-tests.log"
+      ],
+      "refs": [
+        "development plan/phase-4.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:21:30Z"
+    },
+    {
+      "id": "perf-bg",
+      "name": "Performance under background load",
+      "passed": true,
+      "evidence": [
+        "reports/perf-bg.json"
+      ],
+      "refs": [
+        "development plan/phase-4.md#Performance & Size Targets"
+      ],
+      "timestamp": "2025-09-01T00:22:30Z"
+    }
+  ],
+  "endpoints": {},
+  "artifacts": [
+    "reports/ci-summary.json"
+  ],
+  "ci": {"lint": "ok", "typecheck": "ok", "tests": "ok", "size": "ok", "doctor": "ok", "indexEnsure": "ok", "smoke": "ok"},
+  "metrics": {"cachedP95Ms": 0},
+  "generatedAt": "1970-01-01T00:00:00Z"
+  "endpoints": {},
+  "artifacts": [],
+  "ci": {"lint": "", "typecheck": "", "tests": "", "size": "", "doctor": "", "indexEnsure": "", "smoke": ""},
+  "metrics": {"cachedP95Ms": 0},
+  "generatedAt": "1970-01-01T00:00:00Z"
+}

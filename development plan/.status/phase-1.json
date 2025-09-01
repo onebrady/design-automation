@@ -1,0 +1,11 @@
+{
+  "phaseId": "phase-1",
+  "name": "Brand Pack Intelligence",
+  "status": "done",
+  "owner": "Agent",
+  "start": "2025-09-01T00:06:00Z",
+  "completed": "2025-09-01T00:10:00Z",
+  "updatedAt": "2025-09-01T00:10:00Z",
+  "ciRunId": "local-run-0002",
+  "evidenceFile": "development plan/.evidence/phase-1.json"
+}

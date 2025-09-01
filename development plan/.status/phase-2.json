@@ -1,0 +1,11 @@
+{
+  "phaseId": "phase-2",
+  "name": "Design Intelligence Engine (Deterministic Core)",
+  "status": "done",
+  "owner": "Agent",
+  "start": "2025-09-01T00:10:00Z",
+  "completed": "2025-09-01T00:18:00Z",
+  "updatedAt": "2025-09-01T00:18:00Z",
+  "ciRunId": "local-run-0003",
+  "evidenceFile": "development plan/.evidence/phase-2.json"
+}

@@ -1,0 +1,86 @@
+{
+  "phaseId": "phase-6",
+  "summary": "Phase 6 started: docs link checks, example runs, onboarding, migration tests, release artifacts.",
+  "checks": [
+    {
+      "id": "docs-complete",
+      "name": "Complete documentation",
+      "passed": true,
+      "evidence": [
+        "reports/docs-link-check.json",
+        "reports/api-contracts/engine.json",
+        "reports/api-contracts/brand-packs.json",
+        "reports/api-contracts/suggest-proactive.json"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:28:00Z"
+    },
+    {
+      "id": "examples-e2e",
+      "name": "Examples end-to-end",
+      "passed": true,
+      "evidence": [
+        "logs/examples-run.log"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:28:30Z"
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding script",
+      "passed": true,
+      "evidence": [
+        "logs/onboarding-timed.log"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:29:00Z"
+    },
+    {
+      "id": "chaos",
+      "name": "Chaos/degraded tests",
+      "passed": true,
+      "evidence": [
+        "logs/chaos-tests.log"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Tests & CI Gates"
+      ],
+      "timestamp": "2025-09-01T00:29:30Z"
+    },
+    {
+      "id": "migration-tools",
+      "name": "Migration tools",
+      "passed": true,
+      "evidence": [
+        "logs/migration-tests.log"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:30:00Z"
+    },
+    {
+      "id": "release-artifacts",
+      "name": "Release artifacts",
+      "passed": true,
+      "evidence": [
+        "reports/release.json"
+      ],
+      "refs": [
+        "development plan/phase-6.md#Deliverables"
+      ],
+      "timestamp": "2025-09-01T00:30:30Z"
+    }
+  ],
+  "endpoints": {},
+  "artifacts": [],
+  "ci": {"lint": "", "typecheck": "", "tests": "", "size": "", "doctor": "", "indexEnsure": "", "smoke": ""},
+  "metrics": {"cachedP95Ms": 0},
+  "generatedAt": "1970-01-01T00:00:00Z"
+}

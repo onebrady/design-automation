@@ -1,0 +1,18 @@
+{
+  "list": [
+    { "id": "acme", "name": "Acme", "version": "1.0.0", "updated": "2025-01-15T10:30:00Z" }
+  ],
+  "create": { "id": "acme", "version": "1.0.0" },
+  "get": {
+    "id": "acme",
+    "name": "Acme",
+    "version": "1.0.0",
+    "description": "",
+    "tokens": {}
+  },
+  "version": { "id": "acme", "version": "1.1.0" },
+  "versions": [
+    { "id": "acme", "version": "1.1.0" },
+    { "id": "acme", "version": "1.0.0" }
+  ]
+}

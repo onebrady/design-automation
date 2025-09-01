@@ -1,0 +1,16 @@
+{
+  "startedAt": "2025-09-01T02:57:37.565Z",
+  "items": [
+    {
+      "file": "/home/brady/projects/tools/design/examples/minimal/a.css",
+      "cacheHit": false,
+      "changes": 0
+    },
+    {
+      "file": "/home/brady/projects/tools/design/examples/minimal/b.css",
+      "cacheHit": false,
+      "changes": 0
+    }
+  ],
+  "completedAt": "2025-09-01T02:57:37.567Z"
+}

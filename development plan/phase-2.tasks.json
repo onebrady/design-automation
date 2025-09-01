@@ -1,0 +1,12 @@
+{
+  "phaseId": "phase-2",
+  "tasks": [
+    {"id":"engine-safe-classes","name":"Deterministic transforms (safe classes)","description":"spacing, radius/elevation, exact tokens per contracts","artifacts":["snapshots/transforms/*.snap"],"ciJobs":["tests"],"refs":["prd.md#Deterministic Transform Contracts (MVP)","development plan/phase-2.md#Deliverables"]},
+    {"id":"guardrails","name":"Guardrails & caps","description":"AA, caps, exclusions, ignore markers","artifacts":["reports/guardrails.json"],"ciJobs":["tests"],"refs":["prd.md#Safe Auto-Apply Contract (MVP)"]},
+    {"id":"cache-core","name":"Cache signatures + invalidation","description":"signature composition, invalidation triggers, indexes","artifacts":["reports/cache-tests.json"],"ciJobs":["tests","indexEnsure"],"refs":["docs/data-schemas.md#Cache Signature Rules","docs/data-schemas.md#Invalidation Policy"]},
+    {"id":"perf-cached","name":"Performance (cached p95)","description":"measure cached p95 and hit rate","artifacts":["reports/perf.json"],"ciJobs":["tests"],"refs":["docs/build-quality-plan.md#Enhanced CI Gates"]},
+    {"id":"vite-plugin","name":"Vite plugin (dev-only)","description":"enhance on dev; respect discovery + guardrails","artifacts":["logs/plugin-tests.log"],"ciJobs":["tests"],"refs":["development plan/phase-2.md#Deliverables"]},
+    {"id":"sdk-v0","name":"SDK v0","description":"resolve/enhance/enhanceCached/onStatus","artifacts":["reports/sdk-tests.json"],"ciJobs":["tests"],"refs":["development plan/phase-2.md#Interfaces"]},
+    {"id":"api-contracts","name":"API contracts","description":"analyze/enhance/enhance-cached","artifacts":["reports/api-contracts/engine.json"],"ciJobs":["tests"],"refs":["docs/design-engine-spec.md#API Contracts (Enhanced)"]}
+  ]
+}

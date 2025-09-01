@@ -1,0 +1,11 @@
+{
+  "code": ".card{border-radius: var(--radius-md);}",
+  "changes": [
+    {
+      "type": "radius-normalization",
+      "before": "border-radius:8px;",
+      "after": "border-radius: var(--radius-md);",
+      "location": "css:border-radius"
+    }
+  ]
+}

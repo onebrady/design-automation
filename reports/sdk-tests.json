@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2025-09-01T02:47:10.022Z",
+  "ctx": {
+    "degraded": true,
+    "mongoAvailable": false
+  },
+  "statusEvents": [
+    {
+      "mongoAvailable": false,
+      "degraded": true,
+      "at": "2025-09-01T02:47:10.020Z"
+    }
+  ],
+  "enhance": {
+    "changes": 0
+  },
+  "enhanceCached": {
+    "first": {
+      "cacheHit": false
+    },
+    "second": {
+      "cacheHit": true
+    }
+  }
+}

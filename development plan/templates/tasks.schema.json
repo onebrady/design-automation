@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Phase Tasks",
+  "type": "object",
+  "required": ["phaseId", "tasks"],
+  "properties": {
+    "phaseId": { "type": "string", "pattern": "^phase-[0-6]$" },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "refs"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "items": { "type": "string" } },
+          "artifacts": { "type": "array", "items": { "type": "string" } },
+          "ciJobs": { "type": "array", "items": { "type": "string" } },
+          "refs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

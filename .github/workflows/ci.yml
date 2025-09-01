@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - name: Install deps (noop baseline)
+        run: pnpm install --no-frozen-lockfile || true
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Size
+        run: npm run size
+      - name: Doctor
+        run: npm run doctor
+      - name: Index Ensure
+        run: npm run index:ensure
+      - name: Tests
+        run: npm run tests
+      - name: Smoke Health/Context
+        run: npm run smoke
+      - name: Evidence Validate (Phase 0)
+        run: |
+          echo "Phase 0 evidence validation placeholder. See development plan/ci-validation-phase-0.md"

@@ -1,0 +1,11 @@
+{
+  "phaseId": "phase-1",
+  "tasks": [
+    {"id":"collections-indexes","name":"Create collections & indexes","description":"brand_packs, versions, usage_analytics, migrations","artifacts":["logs/index-ensure.log"],"ciJobs":["indexEnsure","tests"],"refs":["docs/brand-pack-spec.md","development plan/phase-1.md#Data & DB"]},
+    {"id":"api-crud","name":"CRUD/versioning APIs","description":"list/create/get/version/history","artifacts":["reports/api-contracts/brand-packs.json"],"ciJobs":["tests"],"refs":["development plan/phase-1.md#Interfaces"]},
+    {"id":"exports","name":"Export endpoints","description":"brand.css and JSON bundle","artifacts":["snapshots/brand.css","snapshots/brand-pack.json"],"ciJobs":["tests"],"refs":["development plan/phase-1.md#Deliverables"]},
+    {"id":"lock-write","name":"Lock snapshot write","description":"Write .agentic/brand-pack.lock.json on bind/update","artifacts":["examples/*/.agentic/brand-pack.lock.json"],"ciJobs":["tests"],"refs":["docs/discovery.md#Configuration Files"]},
+    {"id":"validators","name":"Validators (contrast/naming/schema)","description":"Non-ML validators active","artifacts":["reports/validator-results.json"],"ciJobs":["tests"],"refs":["docs/brand-pack-spec.md#Validation Rules"]},
+    {"id":"studio-basic","name":"Studio basics","description":"Create/edit core fields + tokens; preview exports","artifacts":["snapshots/studio-preview.png"],"ciJobs":["tests"],"refs":["development plan/phase-1.md#Deliverables"]}
+  ]
+}

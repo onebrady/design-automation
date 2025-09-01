@@ -1,0 +1,11 @@
+{
+  "code": ".btn{background:var(--color-primary);}",
+  "changes": [
+    {
+      "type": "color-tokenization",
+      "before": "#1f2937",
+      "after": "var(--color-primary)",
+      "location": "css:color"
+    }
+  ]
+}

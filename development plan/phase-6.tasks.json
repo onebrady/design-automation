@@ -1,0 +1,12 @@
+{
+  "phaseId": "phase-6",
+  "tasks": [
+    {"id":"docs-complete","name":"Complete documentation","description":"API, migration, best practices, privacy","artifacts":["reports/docs-link-check.json","snapshots/api-samples.json"],"ciJobs":["tests"],"refs":["development plan/phase-6.md#Deliverables"]},
+    {"id":"examples-e2e","name":"Examples end-to-end","description":"Automated runs with expected outputs/timings","artifacts":["logs/examples-run.log"],"ciJobs":["smoke","tests"],"refs":["development plan/phase-6.md#Deliverables"]},
+    {"id":"onboarding","name":"Onboarding script","description":"<5 minutes setup verified","artifacts":["logs/onboarding-timed.log"],"ciJobs":["smoke"],"refs":["development plan/phase-6.md#Deliverables"]},
+    {"id":"chaos","name":"Chaos/degraded tests","description":"Simulate Mongo outages; recovery verified","artifacts":["logs/chaos-tests.log"],"ciJobs":["tests"],"refs":["development plan/phase-6.md#Tests & CI Gates"]},
+    {"id":"migration-tools","name":"Migration tools","description":"Backup/restore; upgrade/downgrade","artifacts":["logs/migration-tests.log"],"ciJobs":["tests"],"refs":["development plan/phase-6.md#Deliverables"]},
+    {"id":"release-artifacts","name":"Release artifacts","description":"Changelog, versions, provenance/SBOM","artifacts":["reports/release.json"],"ciJobs":["tests"],"refs":["development plan/phase-6.md#Deliverables"]}
+  ]
+}
+

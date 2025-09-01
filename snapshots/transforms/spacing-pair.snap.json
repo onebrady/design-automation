@@ -1,0 +1,11 @@
+{
+  "code": ".btn{padding:var(--spacing-md) var(--spacing-lg);}",
+  "changes": [
+    {
+      "type": "spacing-normalization",
+      "before": "padding:16px 32px;",
+      "after": "padding:var(--spacing-md) var(--spacing-lg);",
+      "location": "css:padding"
+    }
+  ]
+}

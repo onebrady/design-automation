@@ -1,0 +1,18 @@
+{
+  "phaseId": "phase-7",
+  "tasks": [
+    {"id":"studio-scaffold","name":"Scaffold Vite React app","description":"Vite + React + TS under apps/studio","artifacts":["apps/studio/vite.config.ts","apps/studio/src/main.tsx"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"dev-proxy","name":"Configure dev proxy","description":"Proxy /api to http://localhost:3001","artifacts":["apps/studio/vite.config.ts"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"api-client","name":"API client","description":"REST fetch wrappers","artifacts":["apps/studio/src/lib/api.ts"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-dashboard","name":"Dashboard view","description":"Health/context status","artifacts":["logs/studio-dashboard.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-brandpacks","name":"Brand Packs view","description":"List/create/version/export","artifacts":["logs/studio-brandpacks.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-playground","name":"Playground view","description":"Analyze/Enhance/Enhance-cached","artifacts":["logs/studio-playground.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-suggestions","name":"Suggestions view","description":"Advisory suggestions","artifacts":["logs/studio-suggestions.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-analytics","name":"Analytics view","description":"Local rollups display","artifacts":["logs/studio-analytics.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"view-settings","name":"Settings view","description":"Env and auto-apply toggles","artifacts":["logs/studio-settings.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Deliverables"]},
+    {"id":"studio-build","name":"Build & E2E smoke","description":"studio:build and dev smoke","artifacts":["logs/studio-build.log","logs/studio-smoke.log"],"ciJobs":["tests"],"refs":["development plan/phase-7.md#Tests & CI Gates"]},
+    {"id":"size-budget","name":"Size budget report","description":"size-limit report for studio","artifacts":["reports/studio-size.json"],"ciJobs":["size"],"refs":["docs/file-size-management.md"]},
+    {"id":"a11y-basics","name":"A11y basics","description":"Contrast and keyboard focus checks","artifacts":["reports/studio-a11y.json"],"ciJobs":["tests"],"refs":["docs/build-quality-plan.md#Intelligent Accessibility Charter"]}
+  ]
+}
+

@@ -1,0 +1,14 @@
+{
+  "analyze": {
+    "request": { "code": ".btn{padding:16px 32px}", "codeType": "css" },
+    "response": { "metrics": { "tokenAdherence": 0, "size": { "rawBytes": 26 } } }
+  },
+  "enhance": {
+    "request": { "code": ".btn{padding:16px 32px}", "codeType": "css" },
+    "response": { "code": ".btn{padding:var(--spacing-md) var(--spacing-lg)}" }
+  },
+  "enhance-cached": {
+    "request": { "code": ".btn{padding:16px 32px}", "codeType": "css" },
+    "response": { "cacheHit": true }
+  }
+}

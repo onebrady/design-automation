@@ -1,0 +1,10 @@
+{
+  "expandedAutoApply": false,
+  "perClassThresholds": {
+    "spacing": 0.9,
+    "radius": 0.9,
+    "exact-token": 1.0
+  },
+  "changeCaps": 5,
+  "guardrails": ["AA contrast", "vendor exclusion", "ignore markers"]
+}
