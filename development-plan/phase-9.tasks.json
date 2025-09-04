@@ -1,0 +1,136 @@
+{
+  "phase": "phase-9",
+  "title": "Final API Endpoint Resolution",
+  "description": "Fix import/export mismatches and integration issues to achieve 100% endpoint functionality (59/59 endpoints working)",
+  "tasks": [
+    {
+      "id": "9.1",
+      "title": "Import/Export Alignment Fixes (Phase 9A)",
+      "description": "Fix import/export mismatches preventing 7 endpoints from functioning",
+      "checklist": [
+        "Audit package exports in packages/generator/index.js for ComponentGenerator class",
+        "Audit package exports in packages/patterns/index.js for PatternLearningEngine and ConfidenceEngine classes",
+        "Audit package exports in packages/preview/index.js for PreviewSandbox class",
+        "Audit package exports in packages/semantic/index.js for correct class name (SemanticUnderstandingSystem vs SemanticSystem)",
+        "Audit package exports in packages/layout/index.js for grid functionality classes",
+        "Fix ComponentGenerator import in apps/server/routes/design.js if needed",
+        "Fix PatternLearningEngine import in apps/server/routes/design.js if needed",
+        "Fix PreviewSandbox import path in apps/server/routes/design.js",
+        "Add ConfidenceEngine export to packages/patterns/index.js or fix import",
+        "Fix SemanticSystem import to use correct class name in apps/server/routes/semantic.js",
+        "Verify layout grid system integration in apps/server/routes/layout.js",
+        "Test each fixed import with basic class instantiation"
+      ]
+    },
+    {
+      "id": "9.2", 
+      "title": "Individual Endpoint Testing (Phase 9B)",
+      "description": "Test each of the 7 previously failing endpoints with valid payloads",
+      "checklist": [
+        "Test POST /api/design/customize-template with valid template customization request",
+        "Test POST /api/design/create-sandbox with valid sandbox creation request",
+        "Test POST /api/design/feedback with valid feedback submission request",
+        "Test POST /api/design/suggest-improvements with valid improvement request",
+        "Test POST /api/semantic/detect-component-type with valid component detection request",
+        "Test POST /api/semantic/batch-analyze with valid batch analysis request",
+        "Test POST /api/layout/grid-recommendations with valid grid requirements request",
+        "Validate response formats match API documentation specifications",
+        "Confirm all endpoints return 200 status codes for valid requests",
+        "Verify error handling works correctly for invalid requests",
+        "Document successful test results for each endpoint",
+        "Create evidence artifacts showing before/after endpoint status"
+      ]
+    },
+    {
+      "id": "9.3",
+      "title": "Comprehensive Regression Testing", 
+      "description": "Ensure all 52 working endpoints remain functional after fixes",
+      "checklist": [
+        "Create comprehensive test suite covering all 59 endpoints",
+        "Run health check endpoints to verify system connectivity",
+        "Test brand pack management endpoints (create, read, update, delete)",
+        "Test design enhancement endpoints (enhance, enhance-cached, suggest-proactive)",
+        "Test pattern learning endpoints (working subset)",
+        "Test component generation endpoints (working subset)",
+        "Test layout intelligence endpoints (working subset - template-matches)",
+        "Test semantic analysis endpoints (working subset)",
+        "Test advanced transformation endpoints (typography, animations, gradients)",
+        "Validate performance benchmarks for all endpoints",
+        "Confirm no performance regression in previously working endpoints",
+        "Generate comprehensive test report showing 100% success rate (59/59)"
+      ]
+    },
+    {
+      "id": "9.4",
+      "title": "Documentation Updates & Completion",
+      "description": "Update all documentation to reflect 100% system completion", 
+      "checklist": [
+        "Update docs/api/README.md success rate from 88% to 100%",
+        "Update docs/api service-specific documentation for fixed endpoints",
+        "Update docs/issues/final-endpoints.md with resolution details and completion status",
+        "Create Phase 9 technical implementation notes documenting import/export fixes",
+        "Document the patterns used for fixing each endpoint category",
+        "Create before/after comparison showing endpoint status changes",
+        "Update API endpoint status legend to reflect all endpoints working",
+        "Generate comprehensive Phase 9 completion report with evidence",
+        "Update system overview documentation with 100% success metrics",
+        "Create project completion summary highlighting final achievement"
+      ]
+    },
+    {
+      "id": "9.5",
+      "title": "Evidence Collection & Status Tracking",
+      "description": "Create comprehensive evidence documentation for Phase 9 completion",
+      "checklist": [
+        "Create development plan/.status/phase-9.json with in_progress status and timestamp",
+        "Initialize development plan/.evidence/phase-9.json with phase structure",
+        "Document import/export fixes with before/after code comparisons",
+        "Collect test results for all 7 fixed endpoints showing successful responses",
+        "Collect regression test results showing all 52 endpoints remain functional",
+        "Generate performance benchmark evidence showing response times within targets",
+        "Create API response examples for each fixed endpoint",
+        "Document code changes made to fix each import/export issue",
+        "Generate comprehensive evidence package with all test artifacts",
+        "Update development plan/.status/phase-9.json to done status with CI run ID",
+        "Validate evidence against schema requirements",
+        "Ensure all checklist items have corresponding evidence entries"
+      ]
+    }
+  ],
+  "dependencies": {
+    "9.2": ["9.1"],
+    "9.3": ["9.1", "9.2"], 
+    "9.4": ["9.3"],
+    "9.5": ["9.1", "9.2", "9.3", "9.4"]
+  },
+  "milestones": [
+    {
+      "task": "9.1",
+      "deliverables": ["All import/export mismatches resolved", "Classes properly instantiated in routes"]
+    },
+    {
+      "task": "9.2", 
+      "deliverables": ["All 7 endpoints return successful responses", "Endpoint functionality validated"]
+    },
+    {
+      "task": "9.3",
+      "deliverables": ["100% endpoint success rate confirmed (59/59)", "No regression in existing functionality"]
+    },
+    {
+      "task": "9.4",
+      "deliverables": ["All documentation updated", "Phase 9 completion documented"]
+    },
+    {
+      "task": "9.5",
+      "deliverables": ["Complete evidence package created", "Phase 9 status tracking complete"]
+    }
+  ],
+  "expectedTimeframe": {
+    "9.1": "2-3 hours",
+    "9.2": "1-2 hours", 
+    "9.3": "1-2 hours",
+    "9.4": "1 hour",
+    "9.5": "30 minutes"
+  },
+  "totalEstimate": "5.5-8.5 hours"
+}

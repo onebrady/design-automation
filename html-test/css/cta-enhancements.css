@@ -1,0 +1,229 @@
+/* Additional CTA Enhancements - Trust Indicators and Icons */
+
+/* Button icons */
+.btn-icon {
+    margin-left: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-primary .btn-icon {
+    stroke: currentColor;
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+.btn-secondary .btn-icon {
+    stroke: currentColor;
+}
+
+.btn-secondary:hover .btn-icon {
+    animation: phone-ring 0.5s ease-in-out;
+}
+
+@keyframes phone-ring {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+/* Trust indicators section */
+.cta-trust {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(27, 54, 104, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.trust-item:hover {
+    opacity: 1;
+}
+
+.trust-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-secondary);
+    opacity: 0.7;
+}
+
+/* Accessibility improvements */
+.cta-section:focus-within {
+    outline: 2px dashed var(--color-secondary);
+    outline-offset: 10px;
+}
+
+/* Skip to CTA link (hidden but accessible) */
+.skip-to-cta {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+}
+
+.skip-to-cta:focus {
+    transform: translateY(0);
+}
+
+/* Loading states for async button actions */
+.btn[aria-busy="true"] {
+    position: relative;
+    cursor: wait;
+}
+
+.btn[aria-busy="true"] .btn-icon {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Success state */
+.btn.success {
+    background: #28a745 !important;
+    border-color: #28a745 !important;
+    pointer-events: none;
+}
+
+.btn.success::after {
+    content: '✓';
+    margin-left: 8px;
+    font-size: 20px;
+    animation: checkmark-scale 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkmark-scale {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .cta-trust {
+        margin-top: 40px;
+        padding-top: 30px;
+        gap: 20px;
+        flex-direction: column;
+    }
+    
+    .trust-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-icon {
+        margin-left: 6px;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cta-trust {
+        gap: 30px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .cta-section {
+        background: linear-gradient(135deg, #1a1a1a 0%, rgba(27, 54, 104, 0.2) 100%);
+    }
+    
+    .cta-section .container {
+        color: #f0f0f0;
+    }
+    
+    .cta-section p {
+        color: #b0b0b0;
+    }
+    
+    .trust-item {
+        color: #a0a0a0;
+    }
+    
+    .btn-secondary {
+        background: #2a2a2a !important;
+        border-color: var(--color-primary);
+        color: white !important;
+    }
+}
+
+/* Fix secondary button in light mode */
+.btn-secondary {
+    background: white !important;
+    color: var(--color-primary) !important;
+}
+
+/* Only apply blue color when NOT hovering */
+.btn-secondary:not(:hover) span,
+.btn-secondary:not(:hover) svg,
+.btn-secondary:not(:hover) .btn-icon {
+    color: var(--color-primary) !important;
+}
+
+/* Ensure white text on hover */
+.btn-secondary:hover span,
+.btn-secondary:hover svg,
+.btn-secondary:hover .btn-icon {
+    color: white !important;
+    stroke: white !important;
+}
+
+/* Enhanced focus styles for keyboard navigation */
+.cta-section *:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Smooth scroll behavior for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Performance optimization - GPU acceleration for animations */
+.btn,
+.btn::before,
+.btn::after,
+.btn-icon {
+    will-change: transform;
+}
+
+/* Clean up after animations */
+.btn:not(:hover) {
+    will-change: auto;
+}

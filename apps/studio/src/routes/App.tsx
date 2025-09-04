@@ -1,19 +1,21 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ThemeSwitcher } from "@/components/ui/theme-switcher"
 import { 
   HomeIcon, 
   PackageIcon, 
   PlayCircleIcon, 
   LightbulbIcon, 
   BarChart3Icon, 
-  SettingsIcon 
+  SettingsIcon,
+  Wand2Icon 
 } from 'lucide-react'
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ThemeSwitcher } from "@/components/ui/theme-switcher"
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
   { name: 'Brand Packs', href: '/brand-packs', icon: PackageIcon },
+  { name: 'Generate', href: '/generate', icon: Wand2Icon },
   { name: 'Playground', href: '/playground', icon: PlayCircleIcon },
   { name: 'Suggestions', href: '/suggestions', icon: LightbulbIcon },
   { name: 'Analytics', href: '/analytics', icon: BarChart3Icon },

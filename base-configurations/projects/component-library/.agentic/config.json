@@ -1,0 +1,218 @@
+{
+  "name": "Component Library Template",
+  "version": "1.0.0",
+  "type": "component-library",
+  "description": "Reusable component library with AI-driven design automation",
+  
+  "brandPack": {
+    "id": "{{BRAND_PACK_ID}}",
+    "autoResolve": true,
+    "fallback": "default-component-library"
+  },
+  
+  "enhancement": {
+    "level": "comprehensive",
+    "autoApply": "manual",
+    "batchProcessing": true,
+    "preserveCustomizations": true
+  },
+  
+  "features": {
+    "typography": {
+      "enabled": true,
+      "enforceScale": true,
+      "webfonts": false,
+      "exportTokens": true
+    },
+    "colors": {
+      "enabled": true,
+      "enforceTokens": true,
+      "contrastChecking": true,
+      "exportTokens": true
+    },
+    "spacing": {
+      "enabled": true,
+      "enforceScale": true,
+      "responsive": true,
+      "exportTokens": true
+    },
+    "animations": {
+      "enabled": true,
+      "respectMotionPreference": true,
+      "maxDuration": "800ms",
+      "exportTokens": true
+    },
+    "gradients": {
+      "enabled": false,
+      "fallbackColors": true
+    },
+    "semantics": {
+      "enabled": true,
+      "accessibility": true,
+      "seo": false,
+      "wcagLevel": "AA"
+    },
+    "components": {
+      "generation": true,
+      "enhancement": true,
+      "patterns": true,
+      "storyGeneration": true
+    },
+    "layout": {
+      "analysis": true,
+      "responsive": true,
+      "gridSystems": true
+    }
+  },
+  
+  "componentLibrary": {
+    "sourceDir": "./src/components",
+    "outputDir": "./dist",
+    "tokensDir": "./src/tokens",
+    "storiesDir": "./src/stories",
+    "exports": {
+      "esm": true,
+      "cjs": true,
+      "umd": false,
+      "css": true,
+      "tokens": true
+    },
+    
+    "naming": {
+      "convention": "PascalCase",
+      "prefix": "",
+      "suffix": ""
+    },
+    
+    "generation": {
+      "includeTypes": true,
+      "includeStories": true,
+      "includeTests": true,
+      "includeProps": true
+    }
+  },
+  
+  "performance": {
+    "cacheStrategy": "aggressive",
+    "maxConcurrent": 2,
+    "timeout": 45000,
+    "retries": 3,
+    "cacheExpiry": 7200,
+    "batchSize": 5
+  },
+  
+  "development": {
+    "hotReload": true,
+    "sourceMap": true,
+    "validation": "strict",
+    "logging": "debug"
+  },
+  
+  "build": {
+    "optimization": true,
+    "minification": true,
+    "purgeUnused": false,
+    "generateReport": true,
+    "treeshaking": true,
+    "sizeAnalysis": true
+  },
+  
+  "team": {
+    "sharedPatterns": true,
+    "conflictResolution": "manual",
+    "reviewRequired": true,
+    "metricsCollection": true
+  },
+  
+  "integration": {
+    "framework": "agnostic",
+    "buildTools": ["rollup", "webpack", "vite"],
+    "storybook": {
+      "enabled": true,
+      "version": "7.x"
+    },
+    "testing": {
+      "unit": true,
+      "visual": true,
+      "a11y": true
+    }
+  },
+  
+  "files": {
+    "include": [
+      "src/**/*.{css,scss,sass,less}",
+      "src/**/*.{js,jsx,ts,tsx}",
+      "stories/**/*.{css,scss,sass,less}"
+    ],
+    "exclude": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "coverage/**",
+      "**/*.min.css",
+      "**/*.generated.css"
+    ],
+    "ignore": [
+      "/* agentic:ignore */",
+      "/* no-enhance */",
+      "/* component-library:ignore */"
+    ]
+  },
+  
+  "rules": {
+    "maxChangesPerFile": 5,
+    "preserveVendor": true,
+    "respectImportant": false,
+    "maintainSpecificity": false,
+    "enforceConsistency": true
+  },
+  
+  "accessibility": {
+    "enabled": true,
+    "wcagLevel": "AA",
+    "testing": true,
+    "reporting": true,
+    "validation": "strict"
+  },
+  
+  "tokens": {
+    "export": {
+      "css": true,
+      "scss": true,
+      "js": true,
+      "json": true
+    },
+    "formats": [
+      "css-custom-properties",
+      "scss-variables", 
+      "javascript-es6",
+      "json"
+    ],
+    "naming": {
+      "transform": "kebab",
+      "prefix": "--",
+      "casing": "lower"
+    }
+  },
+  
+  "documentation": {
+    "auto-generate": true,
+    "includeProps": true,
+    "includeExamples": true,
+    "includeTokens": true,
+    "format": ["markdown", "json"]
+  },
+  
+  "reporting": {
+    "enabled": true,
+    "format": ["json", "html"],
+    "destination": "reports/design-automation",
+    "metrics": [
+      "token-adoption",
+      "component-consistency",
+      "accessibility-score",
+      "bundle-size",
+      "performance-impact"
+    ]
+  }
+}

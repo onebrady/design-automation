@@ -1,0 +1,298 @@
+/* About Page Specific Styles - Will be enhanced by Agentic */
+
+/* About Hero */
+.about-hero {
+    background: linear-gradient(135deg, #1B3668 0%, #2A4F8F 100%);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 56px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.page-subtitle {
+    font-size: 24px;
+    opacity: 0.95;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.timeline {
+    position: relative;
+    padding: 40px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #1B3668;
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-year {
+    flex: 0 0 150px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #1B3668;
+    position: relative;
+}
+
+.timeline-year::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #2A4F8F;
+    border: 4px solid white;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-content {
+    flex: 1;
+    max-width: 400px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.timeline-content h3 {
+    color: #1B3668;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.timeline-content p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Team Section */
+.team-section {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.team-member {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.member-photo {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #1B3668, #2A4F8F);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.team-member h3 {
+    color: #1B3668;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.member-title {
+    color: #2A4F8F;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.member-bio {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Values Section */
+.values-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.value-card {
+    text-align: center;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.value-card:hover {
+    background: white;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.value-card h3 {
+    color: #1B3668;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.value-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Statistics Section */
+.stats-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1B3668 0%, #2A4F8F 100%);
+    color: white;
+}
+
+.stats-section .section-title {
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.stat-value {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 100px 0;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 42px;
+    color: #1B3668;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Active Navigation State */
+.main-nav a.active {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: column !important;
+        margin-left: 60px;
+    }
+    
+    .timeline-year {
+        position: absolute;
+        left: -60px;
+        top: 0;
+        font-size: 20px;
+    }
+    
+    .timeline-content {
+        max-width: 100%;
+    }
+    
+    .team-grid, .values-grid, .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-title {
+        font-size: 36px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+}

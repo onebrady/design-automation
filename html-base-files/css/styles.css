@@ -1,0 +1,14 @@
+/* Your styles here - will be automatically enhanced by Agentic */
+
+/* 
+ * Examples of automatic enhancements:
+ * 
+ * You write:                    Becomes:
+ * color: blue;                  color: var(--color-primary);
+ * padding: 10px;                padding: var(--spacing-sm);
+ * font-size: 16px;              font-size: var(--font-size-base);
+ * border-radius: 4px;           border-radius: var(--radius-md);
+ * transition: none;             transition: all var(--duration-fast) var(--easing-ease-out);
+ */
+
+/* Start writing your styles below */

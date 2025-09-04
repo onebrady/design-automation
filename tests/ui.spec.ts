@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test'
 import { spawn, ChildProcess } from 'child_process'
 import http from 'http'
+import { test, expect } from '@playwright/test'
 
 async function waitForHttp(url: string, timeoutMs = 8000) {
   const start = Date.now()

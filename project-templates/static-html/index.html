@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project</title>
+    
+    <!-- Brand tokens auto-loaded by Agentic -->
+    <link rel="stylesheet" href="css/brand-tokens.css">
+    
+    <!-- Your styles - will be auto-enhanced -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- AI AGENT: Build your HTML content here -->
+    <!-- All CSS you write will be automatically enhanced with brand tokens -->
+    <!-- Example: color: red; becomes color: var(--color-primary); -->
+    
+    <h1>Start Building Here</h1>
+    
+    <!-- Agentic Client Auto-initialization -->
+    <script src="js/agentic-client.js"></script>
+    <script>
+        // Auto-enhance all styles on page load
+        (async () => {
+            const agentic = new AgenticClient();
+            await agentic.initialize();
+            
+            // Enhance any inline styles
+            const styles = document.querySelectorAll('style');
+            for (const style of styles) {
+                const enhanced = await agentic.enhanceCSS(style.textContent);
+                if (enhanced.css) {
+                    style.textContent = enhanced.css;
+                }
+            }
+            
+            console.log('✅ Agentic Design System ready');
+            console.log('Brand pack:', agentic.brandPackId || 'default');
+            console.log('All CSS will be automatically enhanced');
+        })();
+    </script>
+</body>
+</html>

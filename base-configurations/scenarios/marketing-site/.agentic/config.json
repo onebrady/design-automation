@@ -1,0 +1,124 @@
+{
+  "name": "Marketing Site Template",
+  "version": "1.0.0",
+  "type": "marketing-site",
+  "description": "High-converting marketing website with AI-driven design automation",
+  
+  "brandPack": {
+    "id": "{{BRAND_PACK_ID}}",
+    "autoResolve": true,
+    "fallback": "default-marketing"
+  },
+  
+  "enhancement": {
+    "level": "aggressive",
+    "autoApply": "safe",
+    "batchProcessing": true,
+    "preserveCustomizations": true
+  },
+  
+  "features": {
+    "typography": {
+      "enabled": true,
+      "enforceScale": true,
+      "webfonts": true,
+      "headingOptimization": true
+    },
+    "colors": {
+      "enabled": true,
+      "enforceTokens": true,
+      "contrastChecking": true,
+      "conversionOptimization": true
+    },
+    "spacing": {
+      "enabled": true,
+      "enforceScale": true,
+      "responsive": true,
+      "conversionSpacing": true
+    },
+    "animations": {
+      "enabled": true,
+      "respectMotionPreference": true,
+      "maxDuration": "600ms",
+      "conversionAnimations": true
+    },
+    "gradients": {
+      "enabled": true,
+      "fallbackColors": true,
+      "heroGradients": true
+    },
+    "semantics": {
+      "enabled": true,
+      "accessibility": true,
+      "seo": true,
+      "wcagLevel": "AA"
+    },
+    "components": {
+      "generation": true,
+      "enhancement": true,
+      "patterns": true,
+      "landingPageComponents": true
+    },
+    "layout": {
+      "analysis": true,
+      "responsive": true,
+      "gridSystems": true,
+      "conversionLayout": true
+    }
+  },
+  
+  "marketing": {
+    "conversionOptimization": true,
+    "abTesting": {
+      "enabled": true,
+      "variants": ["control", "variant_a", "variant_b"]
+    },
+    "seo": {
+      "enabled": true,
+      "metaGeneration": true,
+      "schemaMarkup": true,
+      "performanceOptimization": true
+    },
+    "analytics": {
+      "enabled": true,
+      "events": ["click", "scroll", "conversion"]
+    }
+  },
+  
+  "performance": {
+    "cacheStrategy": "aggressive",
+    "maxConcurrent": 5,
+    "timeout": 20000,
+    "retries": 2,
+    "cacheExpiry": 1800,
+    "batchSize": 15,
+    "staticGeneration": true
+  },
+  
+  "files": {
+    "include": [
+      "src/**/*.{css,scss,sass,less}",
+      "src/**/*.{astro,html,jsx,tsx}",
+      "public/**/*.css"
+    ],
+    "exclude": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "**/*.min.css"
+    ]
+  },
+  
+  "reporting": {
+    "enabled": true,
+    "format": ["json", "html"],
+    "destination": "reports/marketing-automation",
+    "metrics": [
+      "conversion-rate",
+      "page-speed",
+      "accessibility-score",
+      "seo-score",
+      "token-adoption"
+    ]
+  }
+}

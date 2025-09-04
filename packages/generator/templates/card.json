@@ -1,0 +1,12 @@
+{
+  "id": "card-basic",
+  "name": "Basic Card",
+  "type": "card",
+  "description": "Content card with header, body, and optional footer",
+  "html": "<div class=\"card\"><div class=\"card-header\"><h3 class=\"card-title\">{{title}}</h3></div><div class=\"card-body\">{{content}}</div><div class=\"card-footer\">{{footer}}</div></div>",
+  "css": ".card { background: {{color-background}}; border: 1px solid {{color-neutral-200}}; border-radius: {{radius-lg}}; overflow: hidden; box-shadow: {{elevation-md}}; } .card-header { padding: {{spacing-lg}}; border-bottom: 1px solid {{color-neutral-200}}; } .card-title { margin: 0; color: {{color-text}}; font-size: 1.25rem; font-weight: 600; } .card-body { padding: {{spacing-lg}}; color: {{color-text}}; } .card-footer { padding: {{spacing-md}} {{spacing-lg}}; background: {{color-neutral-100}}; border-top: 1px solid {{color-neutral-200}}; }",
+  "jsx": "export function Card({ title, children, footer, className = '' }) { return ( <div className={`card ${className}`}> {title && ( <div className=\"card-header\"> <h3 className=\"card-title\">{title}</h3> </div> )} <div className=\"card-body\">{children}</div> {footer && <div className=\"card-footer\">{footer}</div>} </div> ); }",
+  "slots": ["title", "content", "footer"],
+  "tokens": ["color-background", "color-neutral-200", "color-text", "spacing-lg", "spacing-md", "radius-lg", "elevation-md"],
+  "preview": "<!DOCTYPE html><html><head><style>.card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.08); max-width: 400px; } .card-header { padding: 20px; border-bottom: 1px solid #e2e8f0; } .card-title { margin: 0; color: #1f2937; font-size: 1.25rem; font-weight: 600; } .card-body { padding: 20px; color: #374151; }</style></head><body><div class=\"card\"><div class=\"card-header\"><h3 class=\"card-title\">Card Title</h3></div><div class=\"card-body\">This is the card content area where you can put any information.</div></div></body></html>"
+}

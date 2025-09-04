@@ -1,0 +1,22 @@
+{
+  "id": "button-primary",
+  "name": "Primary Button",
+  "type": "button",
+  "description": "Primary action button with brand colors",
+  "html": "<button class=\"btn btn-primary\" type=\"button\">{{text}}</button>",
+  "css": ".btn { padding: {{spacing-md}} {{spacing-lg}}; border: none; border-radius: {{radius-md}}; font-weight: 500; cursor: pointer; transition: all 0.2s ease; } .btn-primary { background: {{color-primary}}; color: {{color-background}}; } .btn-primary:hover { background: {{color-primary-600}}; transform: translateY(-1px); } .btn-primary:active { transform: translateY(0); }",
+  "jsx": "export function Button({ children, className = '', ...props }) { return ( <button className={`btn btn-primary ${className}`} {...props}> {children} </button> ); }",
+  "variants": {
+    "secondary": {
+      "html": "<button class=\"btn btn-secondary\" type=\"button\">{{text}}</button>",
+      "css": ".btn-secondary { background: {{color-secondary}}; color: {{color-background}}; }"
+    },
+    "outline": {
+      "html": "<button class=\"btn btn-outline\" type=\"button\">{{text}}</button>",
+      "css": ".btn-outline { background: transparent; color: {{color-primary}}; border: 2px solid {{color-primary}}; }"
+    }
+  },
+  "slots": ["text"],
+  "tokens": ["color-primary", "color-background", "spacing-md", "spacing-lg", "radius-md"],
+  "preview": "<!DOCTYPE html><html><head><style>.btn { padding: 12px 24px; border: none; border-radius: 6px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; } .btn-primary { background: #3b82f6; color: white; }</style></head><body><button class=\"btn btn-primary\">Primary Button</button></body></html>"
+}

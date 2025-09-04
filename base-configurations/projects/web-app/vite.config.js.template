@@ -1,0 +1,265 @@
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import agenticPlugin from '@agentic/vite-plugin';
+
+export default defineConfig(({ command, mode }) => {
+  const isDevelopment = mode === 'development';
+  const isProduction = mode === 'production';
+  
+  return {
+    // Basic Vite configuration
+    root: '.',
+    publicDir: 'public',
+    
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, './src'),
+        '@components': resolve(__dirname, './src/components'),
+        '@styles': resolve(__dirname, './src/styles'),
+        '@assets': resolve(__dirname, './src/assets')
+      }
+    },
+    
+    // Agentic Design Automation Plugin
+    plugins: [
+      agenticPlugin({
+        // Enable design automation features
+        enabled: true,
+        
+        // Configuration path
+        configPath: './.agentic/config.json',
+        
+        // Enhancement settings
+        enhancement: {
+          // Auto-enhance CSS during development
+          autoEnhance: isDevelopment,
+          
+          // Watch for file changes
+          watch: isDevelopment,
+          
+          // Batch processing for better performance
+          batchProcessing: true,
+          
+          // Apply enhancements on save
+          onSave: isDevelopment,
+          
+          // Generate source maps for debugging
+          sourceMap: isDevelopment
+        },
+        
+        // Build-time optimizations
+        build: {
+          // Optimize CSS during build
+          optimize: isProduction,
+          
+          // Generate design report
+          generateReport: isProduction,
+          
+          // Purge unused design tokens
+          purgeUnused: isProduction,
+          
+          // Minify enhanced CSS
+          minify: isProduction
+        },
+        
+        // Development features
+        dev: {
+          // Hot reload enhanced CSS
+          hmr: isDevelopment,
+          
+          // Show enhancement notifications
+          notifications: isDevelopment,
+          
+          // Display design metrics in dev tools
+          metrics: isDevelopment,
+          
+          // Enable design validation
+          validation: isDevelopment
+        },
+        
+        // Pattern learning
+        patterns: {
+          // Learn from user interactions
+          learning: true,
+          
+          // Share patterns across team
+          sharing: process.env.AGENTIC_SHARED_PATTERNS === 'true',
+          
+          // Generate pattern suggestions
+          suggestions: isDevelopment
+        },
+        
+        // Component generation
+        components: {
+          // Enable AI component generation
+          generation: true,
+          
+          // Output directory for generated components
+          outputDir: './src/components/generated',
+          
+          // Default framework for generation
+          framework: 'react', // or 'vue', 'svelte', 'html'
+          
+          // Include TypeScript definitions
+          typescript: true
+        },
+        
+        // Accessibility features
+        accessibility: {
+          // Enable accessibility enhancements
+          enabled: true,
+          
+          // WCAG compliance level
+          wcagLevel: 'AA',
+          
+          // Generate accessibility reports
+          reporting: isProduction,
+          
+          // Validate during development
+          validation: isDevelopment
+        },
+        
+        // Performance monitoring
+        performance: {
+          // Monitor bundle size impact
+          bundleAnalysis: isProduction,
+          
+          // Track enhancement performance
+          metrics: true,
+          
+          // Set performance budgets
+          budgets: {
+            css: '50kb',
+            js: '250kb'
+          }
+        },
+        
+        // File processing
+        files: {
+          // Include patterns
+          include: [
+            'src/**/*.{css,scss,sass,less}',
+            'components/**/*.{css,scss,sass,less}',
+            'styles/**/*.{css,scss,sass,less}'
+          ],
+          
+          // Exclude patterns
+          exclude: [
+            'node_modules/**',
+            'dist/**',
+            'build/**',
+            '**/*.min.css',
+            '**/*.generated.css'
+          ]
+        },
+        
+        // Error handling
+        errorHandling: {
+          // Continue on errors during development
+          failOnError: isProduction,
+          
+          // Log enhancement errors
+          logErrors: true,
+          
+          // Fallback behavior
+          fallback: 'warn'
+        },
+        
+        // Reporting
+        reporting: {
+          // Enable design automation reports
+          enabled: isProduction,
+          
+          // Report output directory
+          outputDir: './reports/design-automation',
+          
+          // Report formats
+          formats: ['json', 'html'],
+          
+          // Include metrics
+          metrics: [
+            'token-adoption',
+            'accessibility-score',
+            'performance-impact',
+            'pattern-consistency'
+          ]
+        }
+      })
+    ],
+    
+    // CSS preprocessing
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Include design token imports automatically
+          additionalData: `
+            @import "@styles/tokens.scss";
+            @import "@styles/mixins.scss";
+          `
+        }
+      },
+      
+      // PostCSS configuration
+      postcss: {
+        plugins: [
+          // Agentic PostCSS plugin for token transformation
+          require('@agentic/postcss-plugin')({
+            configPath: './.agentic/config.json'
+          })
+        ]
+      }
+    },
+    
+    // Development server
+    server: {
+      port: 3000,
+      host: true,
+      open: true,
+      
+      // Proxy API requests to Agentic server
+      proxy: {
+        '/api/agentic': {
+          target: 'http://localhost:8901',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/agentic/, '/api')
+        }
+      }
+    },
+    
+    // Build configuration
+    build: {
+      target: 'esnext',
+      outDir: 'dist',
+      assetsDir: 'assets',
+      
+      // Source maps for debugging enhanced CSS
+      sourcemap: isDevelopment,
+      
+      // CSS code splitting
+      cssCodeSplit: true,
+      
+      // Rollup options
+      rollupOptions: {
+        output: {
+          // Chunk CSS by features
+          manualChunks: {
+            'design-tokens': ['@agentic/design-sdk']
+          }
+        }
+      }
+    },
+    
+    // Environment variables
+    define: {
+      __AGENTIC_VERSION__: JSON.stringify(process.env.npm_package_version),
+      __AGENTIC_BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+      __AGENTIC_MODE__: JSON.stringify(mode)
+    },
+    
+    // Optimization
+    optimizeDeps: {
+      include: ['@agentic/design-sdk'],
+      exclude: []
+    }
+  };
+});

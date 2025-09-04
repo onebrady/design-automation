@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Fix Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .success {
+            border-left: 4px solid #22c55e;
+        }
+        .error {
+            border-left: 4px solid #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phase 8 API Fix Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: CORS - Generate Component</h2>
+        <button onclick="testGenerateComponent()">Test Generate Component</button>
+        <div id="result1" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: HTML Enhancement</h2>
+        <button onclick="testEnhanceHTML()">Test HTML Enhancement</button>
+        <div id="result2" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: CSS Enhancement</h2>
+        <button onclick="testEnhanceCSS()">Test CSS Enhancement</button>
+        <div id="result3" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8901';
+
+        async function testGenerateComponent() {
+            const resultDiv = document.getElementById('result1');
+            resultDiv.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/design/generate-component`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        description: 'A modern button with hover effects',
+                        componentType: 'button',
+                        framework: 'html'
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ SUCCESS - CORS working!\n\nResponse:\n${JSON.stringify(data, null, 2).substring(0, 500)}...`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ FAILED - ${error.message}`;
+            }
+        }
+
+        async function testEnhanceHTML() {
+            const resultDiv = document.getElementById('result2');
+            resultDiv.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/design/enhance-cached`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        code: '<div class="header">Test</div><style>.header { color: #ff0000; padding: 16px; }</style>',
+                        codeType: 'html'
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ SUCCESS - HTML enhancement working!\n\nResponse:\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ FAILED - ${error.message}`;
+            }
+        }
+
+        async function testEnhanceCSS() {
+            const resultDiv = document.getElementById('result3');
+            resultDiv.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/design/enhance-cached`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        code: '.button { background: #007bff; color: white; padding: 8px 16px; }',
+                        codeType: 'css'
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ SUCCESS - CSS enhancement working!\n\nResponse:\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ FAILED - ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

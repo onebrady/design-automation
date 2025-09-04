@@ -1,0 +1,25 @@
+{
+  "id": "hero-section",
+  "name": "Hero Section",
+  "category": "headers",
+  "description": "Full-width hero section with centered content and call-to-action",
+  "type": "layout",
+  "responsive": true,
+  "html": "<section class=\"hero\">\n  <div class=\"hero-content\">\n    <h1 class=\"hero-title\">{{title}}</h1>\n    <p class=\"hero-subtitle\">{{subtitle}}</p>\n    <div class=\"hero-actions\">\n      <a href=\"{{primaryLink}}\" class=\"btn btn-primary\">{{primaryText}}</a>\n      <a href=\"{{secondaryLink}}\" class=\"btn btn-secondary\">{{secondaryText}}</a>\n    </div>\n  </div>\n</section>",
+  "css": ".hero {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 70vh;\n  padding: var(--spacing-xl, 3rem) var(--spacing-md, 1rem);\n  background: linear-gradient(135deg, var(--color-primary, #3b82f6), var(--color-secondary, #1d4ed8));\n  color: var(--color-background, white);\n  text-align: center;\n}\n\n.hero-content {\n  max-width: 800px;\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-lg, 2rem);\n}\n\n.hero-title {\n  font-size: clamp(2rem, 5vw, 4rem);\n  font-weight: 700;\n  line-height: 1.2;\n  margin: 0;\n}\n\n.hero-subtitle {\n  font-size: clamp(1rem, 2.5vw, 1.5rem);\n  line-height: 1.6;\n  opacity: 0.9;\n  margin: 0;\n}\n\n.hero-actions {\n  display: flex;\n  gap: var(--spacing-md, 1rem);\n  justify-content: center;\n  flex-wrap: wrap;\n}\n\n@media (max-width: 768px) {\n  .hero {\n    min-height: 50vh;\n    padding: var(--spacing-lg, 2rem) var(--spacing-sm, 0.5rem);\n  }\n  \n  .hero-actions {\n    flex-direction: column;\n    align-items: center;\n  }\n}",
+  "slots": ["title", "subtitle", "primaryText", "primaryLink", "secondaryText", "secondaryLink"],
+  "tokens": ["color-primary", "color-secondary", "color-background", "spacing-md", "spacing-lg", "spacing-xl"],
+  "variants": {
+    "minimal": {
+      "css": ".hero { background: var(--color-background); color: var(--color-text); }"
+    },
+    "image-background": {
+      "css": ".hero { background-image: url('{{backgroundImage}}'); background-size: cover; background-position: center; position: relative; } .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }"
+    },
+    "split": {
+      "html": "<section class=\"hero hero-split\">\n  <div class=\"hero-content\">\n    <h1 class=\"hero-title\">{{title}}</h1>\n    <p class=\"hero-subtitle\">{{subtitle}}</p>\n    <div class=\"hero-actions\">\n      <a href=\"{{primaryLink}}\" class=\"btn btn-primary\">{{primaryText}}</a>\n    </div>\n  </div>\n  <div class=\"hero-image\">\n    <img src=\"{{image}}\" alt=\"{{imageAlt}}\">\n  </div>\n</section>",
+      "css": ".hero-split { flex-direction: row; gap: 4rem; text-align: left; } .hero-content { flex: 1; } .hero-image { flex: 1; } .hero-image img { width: 100%; height: auto; border-radius: 12px; } @media (max-width: 768px) { .hero-split { flex-direction: column; text-align: center; } }"
+    }
+  },
+  "preview": "<!DOCTYPE html><html><head><style>.hero{display:flex;align-items:center;justify-content:center;min-height:70vh;padding:3rem 1rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white;text-align:center}.hero-content{max-width:800px;display:flex;flex-direction:column;gap:2rem}.hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:700;line-height:1.2;margin:0}.hero-subtitle{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.6;opacity:0.9;margin:0}.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.btn{padding:12px 24px;border:none;border-radius:6px;font-weight:500;text-decoration:none;display:inline-block}.btn-primary{background:#fff;color:#3b82f6}.btn-secondary{background:transparent;color:#fff;border:2px solid #fff}</style></head><body><section class=\"hero\"><div class=\"hero-content\"><h1 class=\"hero-title\">Welcome to Our Platform</h1><p class=\"hero-subtitle\">Build amazing experiences with our powerful tools and services</p><div class=\"hero-actions\"><a href=\"#\" class=\"btn btn-primary\">Get Started</a><a href=\"#\" class=\"btn btn-secondary\">Learn More</a></div></div></section></body></html>"
+}

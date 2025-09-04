@@ -1,0 +1,511 @@
+{
+  "id": "fresh-modern-2025",
+  "name": "Fresh Modern 2025",
+  "version": "1.0.0",
+  "description": "Modern, clean design system optimized for 2025 web standards",
+  "createdAt": "2025-09-02T02:16:52.872Z",
+  "colors": {
+    "roles": {
+      "primary": {
+        "value": "#2563eb",
+        "description": "Primary brand color"
+      },
+      "primary-50": {
+        "value": "#eff6ff",
+        "description": "Primary tint 50"
+      },
+      "primary-100": {
+        "value": "#dbeafe",
+        "description": "Primary tint 100"
+      },
+      "primary-200": {
+        "value": "#bfdbfe",
+        "description": "Primary tint 200"
+      },
+      "primary-300": {
+        "value": "#93c5fd",
+        "description": "Primary tint 300"
+      },
+      "primary-400": {
+        "value": "#60a5fa",
+        "description": "Primary tint 400"
+      },
+      "primary-500": {
+        "value": "#3b82f6",
+        "description": "Primary tint 500"
+      },
+      "primary-600": {
+        "value": "#2563eb",
+        "description": "Primary tint 600"
+      },
+      "primary-700": {
+        "value": "#1d4ed8",
+        "description": "Primary tint 700"
+      },
+      "primary-800": {
+        "value": "#1e40af",
+        "description": "Primary tint 800"
+      },
+      "primary-900": {
+        "value": "#1e3a8a",
+        "description": "Primary tint 900"
+      },
+      "primary-contrast": {
+        "value": "#ffffff",
+        "description": "Primary contrast text"
+      },
+      "primary-alpha-10": {
+        "value": "rgba(37, 99, 235, 0.1)",
+        "description": "Primary with 10% opacity"
+      },
+      "primary-alpha-20": {
+        "value": "rgba(37, 99, 235, 0.2)",
+        "description": "Primary with 20% opacity"
+      },
+      "primary-alpha-50": {
+        "value": "rgba(37, 99, 235, 0.5)",
+        "description": "Primary with 50% opacity"
+      },
+      "secondary": {
+        "value": "#6b7280",
+        "description": "Secondary brand color"
+      },
+      "secondary-50": {
+        "value": "#f9fafb",
+        "description": "Secondary tint 50"
+      },
+      "secondary-100": {
+        "value": "#f3f4f6",
+        "description": "Secondary tint 100"
+      },
+      "secondary-200": {
+        "value": "#e5e7eb",
+        "description": "Secondary tint 200"
+      },
+      "secondary-300": {
+        "value": "#d1d5db",
+        "description": "Secondary tint 300"
+      },
+      "secondary-400": {
+        "value": "#9ca3af",
+        "description": "Secondary tint 400"
+      },
+      "secondary-500": {
+        "value": "#6b7280",
+        "description": "Secondary tint 500"
+      },
+      "secondary-600": {
+        "value": "#4b5563",
+        "description": "Secondary tint 600"
+      },
+      "secondary-700": {
+        "value": "#374151",
+        "description": "Secondary tint 700"
+      },
+      "secondary-800": {
+        "value": "#1f2937",
+        "description": "Secondary tint 800"
+      },
+      "secondary-900": {
+        "value": "#111827",
+        "description": "Secondary tint 900"
+      },
+      "success": {
+        "value": "#10b981",
+        "description": "Success state color"
+      },
+      "success-50": {
+        "value": "#ecfdf5",
+        "description": "Success tint 50"
+      },
+      "success-600": {
+        "value": "#059669",
+        "description": "Success tint 600"
+      },
+      "success-700": {
+        "value": "#047857",
+        "description": "Success tint 700"
+      },
+      "error": {
+        "value": "#ef4444",
+        "description": "Error state color"
+      },
+      "error-50": {
+        "value": "#fef2f2",
+        "description": "Error tint 50"
+      },
+      "error-600": {
+        "value": "#dc2626",
+        "description": "Error tint 600"
+      },
+      "error-700": {
+        "value": "#b91c1c",
+        "description": "Error tint 700"
+      },
+      "warning": {
+        "value": "#f59e0b",
+        "description": "Warning state color"
+      },
+      "warning-50": {
+        "value": "#fffbeb",
+        "description": "Warning tint 50"
+      },
+      "warning-600": {
+        "value": "#d97706",
+        "description": "Warning tint 600"
+      },
+      "warning-700": {
+        "value": "#b45309",
+        "description": "Warning tint 700"
+      },
+      "surface": {
+        "value": "#ffffff",
+        "description": "Primary surface background"
+      },
+      "surface-secondary": {
+        "value": "#f9fafb",
+        "description": "Secondary surface background"
+      },
+      "surface-tertiary": {
+        "value": "#f3f4f6",
+        "description": "Tertiary surface background"
+      },
+      "text-primary": {
+        "value": "#111827",
+        "description": "Primary text color"
+      },
+      "text-secondary": {
+        "value": "#6b7280",
+        "description": "Secondary text color"
+      },
+      "text-tertiary": {
+        "value": "#9ca3af",
+        "description": "Tertiary text color"
+      },
+      "border": {
+        "value": "#e5e7eb",
+        "description": "Default border color"
+      },
+      "border-secondary": {
+        "value": "#d1d5db",
+        "description": "Secondary border color"
+      },
+      "border-strong": {
+        "value": "#9ca3af",
+        "description": "Strong border color"
+      }
+    }
+  },
+  "spacing": {
+    "tokens": {
+      "xs": {
+        "value": "0.25rem",
+        "description": "4px - Extra small spacing"
+      },
+      "sm": {
+        "value": "0.5rem",
+        "description": "8px - Small spacing"
+      },
+      "md": {
+        "value": "1rem",
+        "description": "16px - Medium spacing"
+      },
+      "lg": {
+        "value": "1.5rem",
+        "description": "24px - Large spacing"
+      },
+      "xl": {
+        "value": "2rem",
+        "description": "32px - Extra large spacing"
+      },
+      "2xl": {
+        "value": "3rem",
+        "description": "48px - 2x extra large spacing"
+      },
+      "3xl": {
+        "value": "4rem",
+        "description": "64px - 3x extra large spacing"
+      },
+      "4xl": {
+        "value": "6rem",
+        "description": "96px - 4x extra large spacing"
+      },
+      "5xl": {
+        "value": "8rem",
+        "description": "128px - 5x extra large spacing"
+      }
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "sans": {
+        "value": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "description": "Default sans-serif font stack"
+      },
+      "mono": {
+        "value": "\"SF Mono\", Monaco, \"Cascadia Code\", \"Roboto Mono\", Consolas, \"Courier New\", monospace",
+        "description": "Monospace font stack"
+      }
+    },
+    "fontSizes": {
+      "xs": {
+        "value": "0.75rem",
+        "description": "12px - Extra small text"
+      },
+      "sm": {
+        "value": "0.875rem",
+        "description": "14px - Small text"
+      },
+      "base": {
+        "value": "1rem",
+        "description": "16px - Base text size"
+      },
+      "lg": {
+        "value": "1.125rem",
+        "description": "18px - Large text"
+      },
+      "xl": {
+        "value": "1.25rem",
+        "description": "20px - Extra large text"
+      },
+      "2xl": {
+        "value": "1.5rem",
+        "description": "24px - 2x extra large text"
+      },
+      "3xl": {
+        "value": "1.875rem",
+        "description": "30px - 3x extra large text"
+      },
+      "4xl": {
+        "value": "2.25rem",
+        "description": "36px - 4x extra large text"
+      },
+      "5xl": {
+        "value": "3rem",
+        "description": "48px - 5x extra large text"
+      },
+      "6xl": {
+        "value": "3.75rem",
+        "description": "60px - 6x extra large text"
+      }
+    },
+    "fontWeights": {
+      "thin": {
+        "value": "100",
+        "description": "Thin font weight"
+      },
+      "extralight": {
+        "value": "200",
+        "description": "Extra light font weight"
+      },
+      "light": {
+        "value": "300",
+        "description": "Light font weight"
+      },
+      "normal": {
+        "value": "400",
+        "description": "Normal font weight"
+      },
+      "medium": {
+        "value": "500",
+        "description": "Medium font weight"
+      },
+      "semibold": {
+        "value": "600",
+        "description": "Semibold font weight"
+      },
+      "bold": {
+        "value": "700",
+        "description": "Bold font weight"
+      },
+      "extrabold": {
+        "value": "800",
+        "description": "Extra bold font weight"
+      },
+      "black": {
+        "value": "900",
+        "description": "Black font weight"
+      }
+    },
+    "lineHeights": {
+      "none": {
+        "value": "1",
+        "description": "No line height"
+      },
+      "tight": {
+        "value": "1.25",
+        "description": "Tight line height"
+      },
+      "snug": {
+        "value": "1.375",
+        "description": "Snug line height"
+      },
+      "normal": {
+        "value": "1.5",
+        "description": "Normal line height"
+      },
+      "relaxed": {
+        "value": "1.625",
+        "description": "Relaxed line height"
+      },
+      "loose": {
+        "value": "2",
+        "description": "Loose line height"
+      }
+    }
+  },
+  "radii": {
+    "sm": {
+      "value": "0.25rem",
+      "description": "4px - Small border radius"
+    },
+    "md": {
+      "value": "0.375rem",
+      "description": "6px - Medium border radius"
+    },
+    "lg": {
+      "value": "0.5rem",
+      "description": "8px - Large border radius"
+    },
+    "xl": {
+      "value": "0.75rem",
+      "description": "12px - Extra large border radius"
+    },
+    "2xl": {
+      "value": "1rem",
+      "description": "16px - 2x extra large border radius"
+    },
+    "full": {
+      "value": "50%",
+      "description": "Full border radius (circle)"
+    }
+  },
+  "elevation": {
+    "sm": {
+      "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "description": "Small shadow"
+    },
+    "md": {
+      "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      "description": "Medium shadow"
+    },
+    "lg": {
+      "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      "description": "Large shadow"
+    },
+    "xl": {
+      "value": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      "description": "Extra large shadow"
+    }
+  },
+  "animations": {
+    "duration": {
+      "instant": {
+        "value": "0ms",
+        "description": "No animation"
+      },
+      "fast": {
+        "value": "150ms",
+        "description": "Fast animation"
+      },
+      "normal": {
+        "value": "300ms",
+        "description": "Normal animation"
+      },
+      "slow": {
+        "value": "500ms",
+        "description": "Slow animation"
+      },
+      "slower": {
+        "value": "750ms",
+        "description": "Slower animation"
+      },
+      "slowest": {
+        "value": "1000ms",
+        "description": "Slowest animation"
+      }
+    },
+    "easing": {
+      "ease-out": {
+        "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "description": "Ease out curve"
+      },
+      "ease-in": {
+        "value": "cubic-bezier(0.55, 0.055, 0.675, 0.19)",
+        "description": "Ease in curve"
+      },
+      "ease-in-out": {
+        "value": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+        "description": "Ease in-out curve"
+      },
+      "ease-back": {
+        "value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "description": "Back easing curve"
+      }
+    }
+  },
+  "gradients": {
+    "presets": {
+      "primary": {
+        "value": "linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600))",
+        "description": "Primary gradient"
+      },
+      "secondary": {
+        "value": "linear-gradient(135deg, var(--color-secondary-300), var(--color-secondary-500))",
+        "description": "Secondary gradient"
+      },
+      "success": {
+        "value": "linear-gradient(135deg, var(--color-success), var(--color-success-600))",
+        "description": "Success gradient"
+      },
+      "warm": {
+        "value": "linear-gradient(135deg, #f59e0b, #ef4444)",
+        "description": "Warm gradient"
+      },
+      "cool": {
+        "value": "linear-gradient(135deg, var(--color-primary-400), #8b5cf6)",
+        "description": "Cool gradient"
+      },
+      "glass": {
+        "value": "linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05))",
+        "description": "Glass morphism gradient"
+      }
+    }
+  },
+  "states": {
+    "hover": {
+      "lift": {
+        "value": "translateY(-2px)",
+        "description": "Hover lift transform"
+      },
+      "scale": {
+        "value": "scale(1.05)",
+        "description": "Hover scale transform"
+      },
+      "opacity": {
+        "value": "0.8",
+        "description": "Hover opacity"
+      }
+    },
+    "focus": {
+      "outline": {
+        "value": "2px solid var(--color-primary-300)",
+        "description": "Focus outline"
+      },
+      "ring": {
+        "value": "0 0 0 3px var(--color-primary-alpha-20)",
+        "description": "Focus ring shadow"
+      }
+    },
+    "disabled": {
+      "opacity": {
+        "value": "0.6",
+        "description": "Disabled opacity"
+      },
+      "filter": {
+        "value": "grayscale(1)",
+        "description": "Disabled filter"
+      }
+    }
+  }
+}

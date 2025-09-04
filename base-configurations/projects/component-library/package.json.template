@@ -1,0 +1,204 @@
+{
+  "name": "{{PROJECT_NAME}}-components",
+  "version": "0.1.0",
+  "description": "Component library with AI-driven design automation",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/styles.css",
+    "./tokens": "./dist/tokens.json"
+  },
+  
+  "files": [
+    "dist/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  
+  "scripts": {
+    "dev": "rollup -c --watch",
+    "build": "rollup -c && npm run build:tokens",
+    "build:tokens": "agentic tokens export --format=all --output=dist/",
+    "preview": "npm run build && npm run storybook",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "agentic:enhance": "agentic-enhance src/",
+    "agentic:generate": "agentic components generate",
+    "agentic:tokens": "agentic tokens validate",
+    "agentic:analyze": "agentic-analyze src/components/",
+    "agentic:validate": "agentic-validate",
+    "agentic:report": "agentic-report --components",
+    "design:audit": "agentic audit --accessibility --consistency",
+    "design:sync": "agentic sync --brand-pack",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "size-check": "size-limit"
+  },
+  
+  "dependencies": {
+    "@agentic/design-sdk": "^1.0.0"
+  },
+  
+  "devDependencies": {
+    "@agentic/rollup-plugin": "^1.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@storybook/addon-essentials": "^7.6.0",
+    "@storybook/addon-a11y": "^7.6.0",
+    "@storybook/react": "^7.6.0",
+    "@types/react": "^18.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.0.0",
+    "rollup": "^4.0.0",
+    "rollup-plugin-dts": "^6.0.0",
+    "rollup-plugin-postcss": "^4.0.0",
+    "size-limit": "^11.0.0",
+    "storybook": "^7.6.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  
+  "agentic": {
+    "enabled": true,
+    "configPath": ".agentic/config.json",
+    "brandPackId": "{{BRAND_PACK_ID}}",
+    "type": "component-library",
+    
+    "enhancement": {
+      "autoApply": "manual",
+      "watchMode": true,
+      "batchProcessing": false,
+      "reviewRequired": true
+    },
+    
+    "build": {
+      "integration": true,
+      "optimization": true,
+      "reporting": true,
+      "tokenExtraction": true
+    },
+    
+    "development": {
+      "hotReload": true,
+      "validation": "strict",
+      "sourceMap": true,
+      "storybook": true
+    },
+    
+    "components": {
+      "generation": true,
+      "enhancement": true,
+      "patterns": true,
+      "validation": true
+    },
+    
+    "tokens": {
+      "export": true,
+      "formats": ["css", "scss", "js", "json"],
+      "validation": true
+    },
+    
+    "features": [
+      "typography",
+      "colors",
+      "spacing",
+      "animations",
+      "semantics",
+      "components",
+      "layout"
+    ],
+    
+    "files": {
+      "include": [
+        "src/**/*.{css,scss,sass,less}",
+        "src/**/*.{js,jsx,ts,tsx}",
+        "stories/**/*.{css,scss,sass,less}"
+      ],
+      "exclude": [
+        "node_modules/**",
+        "dist/**",
+        "build/**",
+        "coverage/**",
+        "**/*.min.css",
+        "**/*.generated.css",
+        "storybook-static/**"
+      ]
+    },
+    
+    "reporting": {
+      "enabled": true,
+      "destination": "reports/design-automation",
+      "formats": ["json", "html"],
+      "metrics": [
+        "component-consistency",
+        "token-adoption",
+        "accessibility-score",
+        "bundle-size"
+      ]
+    }
+  },
+  
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "50 KB"
+    },
+    {
+      "path": "dist/index.esm.js", 
+      "limit": "50 KB"
+    },
+    {
+      "path": "dist/styles.css",
+      "limit": "20 KB"
+    }
+  ],
+  
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  
+  "keywords": [
+    "components",
+    "design-system", 
+    "ui-library",
+    "agentic-design",
+    "design-tokens",
+    "react"
+  ],
+  
+  "repository": {
+    "type": "git",
+    "url": "{{REPOSITORY_URL}}"
+  },
+  
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

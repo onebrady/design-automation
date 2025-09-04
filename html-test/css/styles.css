@@ -1,0 +1,530 @@
+/* Western Truck Styles - Will be auto-enhanced by Agentic */
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f5f5f5;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+    background: #1B3668;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 28px;
+    margin: 0;
+    color: white;
+}
+
+.tagline {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.main-nav a:hover {
+    opacity: 0.8;
+}
+
+.cta-button {
+    background: #2A4F8F;
+    padding: 8px 20px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #3a5f9f;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1B3668 0%, #2A4F8F 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+    opacity: 0.95;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #2A4F8F;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #3a5f9f;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #1B3668;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #2A4F8F;
+    border: 2px solid #2A4F8F;
+}
+
+.btn-outline:hover {
+    background: #2A4F8F;
+    color: white;
+}
+
+.btn-large {
+    padding: 18px 48px;
+    font-size: 18px;
+}
+
+/* Hero Stats */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Section Styles */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #1B3668;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #666;
+}
+
+/* Featured Inventory */
+.featured-inventory {
+    background: white;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.vehicle-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.vehicle-image {
+    position: relative;
+    height: 200px;
+    background: #f0f0f0;
+}
+
+.placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #999;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4444;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.vehicle-details {
+    padding: 20px;
+}
+
+.vehicle-details h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #1B3668;
+}
+
+.vehicle-specs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.spec {
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.vehicle-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1B3668;
+}
+
+.monthly {
+    font-size: 14px;
+    color: #666;
+}
+
+.inventory-cta {
+    text-align: center;
+}
+
+/* Financing Section */
+.financing {
+    background: #f9f9f9;
+}
+
+.financing-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.financing-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.financing-card:hover {
+    transform: translateY(-4px);
+}
+
+.financing-card.featured {
+    border: 2px solid #2A4F8F;
+    position: relative;
+}
+
+.financing-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.financing-card h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #1B3668;
+}
+
+.financing-card p {
+    margin-bottom: 24px;
+    color: #666;
+}
+
+.financing-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.financing-card li {
+    padding: 8px 0;
+    color: #555;
+}
+
+.financing-card li::before {
+    content: "✓ ";
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Reviews Section */
+.reviews {
+    background: white;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.review-card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.review-rating {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.review-text {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #555;
+    font-style: italic;
+}
+
+.review-author strong {
+    display: block;
+    font-size: 16px;
+    color: #1B3668;
+    margin-bottom: 4px;
+}
+
+.review-author span {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Footer */
+.site-footer {
+    background: #1B3668;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    padding: 8px 0;
+}
+
+.footer-section a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.social-links a {
+    transition: opacity 0.3s;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+.contact-info li {
+    color: rgba(255,255,255,0.9);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+}
+
+.footer-bottom a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-bottom a:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+    }
+    
+    .inventory-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .financing-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+}

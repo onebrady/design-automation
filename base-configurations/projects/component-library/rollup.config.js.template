@@ -1,0 +1,113 @@
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import postcss from 'rollup-plugin-postcss';
+import dts from 'rollup-plugin-dts';
+import agenticPlugin from '@agentic/rollup-plugin';
+
+const packageJson = require('./package.json');
+
+export default [
+  // Main build
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        file: packageJson.main,
+        format: 'cjs',
+        sourcemap: true,
+        exports: 'named'
+      },
+      {
+        file: packageJson.module,
+        format: 'esm',
+        sourcemap: true
+      }
+    ],
+    plugins: [
+      // Agentic Design Automation Plugin
+      agenticPlugin({
+        enabled: true,
+        configPath: './.agentic/config.json',
+        
+        // Component library specific settings
+        componentLibrary: {
+          enabled: true,
+          generateTypes: true,
+          extractTokens: true,
+          validateConsistency: true
+        },
+        
+        // Enhancement settings
+        enhancement: {
+          autoEnhance: false, // Manual for libraries
+          validateTokens: true,
+          enforceConsistency: true,
+          generateReport: true
+        },
+        
+        // Build optimizations
+        build: {
+          optimize: true,
+          minify: false, // Let consumers decide
+          generateReport: true,
+          extractCSS: true
+        },
+        
+        // Token processing
+        tokens: {
+          extract: true,
+          validate: true,
+          export: ['css', 'scss', 'js', 'json']
+        },
+        
+        // Component validation
+        components: {
+          validateProps: true,
+          checkAccessibility: true,
+          enforceNaming: true,
+          generateDocs: true
+        }
+      }),
+      
+      resolve({
+        browser: true,
+        preferBuiltins: false
+      }),
+      commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        declaration: false, // handled by dts plugin
+        declarationMap: false
+      }),
+      
+      // CSS processing with design token integration
+      postcss({
+        extract: 'styles.css',
+        minimize: true,
+        sourceMap: true,
+        plugins: [
+          // Agentic PostCSS plugin for token transformation
+          require('@agentic/postcss-plugin')({
+            configPath: './.agentic/config.json',
+            extractTokens: true,
+            validateUsage: true
+          })
+        ]
+      })
+    ],
+    external: [
+      'react',
+      'react-dom',
+      ...Object.keys(packageJson.peerDependencies || {})
+    ]
+  },
+  
+  // Type definitions
+  {
+    input: 'dist/types/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    plugins: [dts()],
+    external: [/\.css$/]
+  }
+];

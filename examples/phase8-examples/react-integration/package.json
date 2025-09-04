@@ -1,0 +1,45 @@
+{
+  "name": "phase8-react-integration-example",
+  "version": "1.0.0",
+  "description": "Complete React application demonstrating Phase 8 AI-Driven Design Automation integration",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate": "node scripts/generate-components.js",
+    "enhance": "node scripts/enhance-styles.js",
+    "analyze": "node scripts/analyze-patterns.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "agentic": {
+    "brandPackId": "modern-saas",
+    "brandVersion": "latest",
+    "features": {
+      "componentGeneration": true,
+      "patternLearning": true,
+      "visualPreview": true,
+      "layoutIntelligence": true,
+      "semanticUnderstanding": true,
+      "advancedTransformations": true,
+      "realTimeIntegration": true
+    },
+    "transformations": {
+      "enableTypography": true,
+      "enableAnimations": true,
+      "enableGradients": true,
+      "enableStates": true,
+      "enableOptimization": true
+    }
+  }
+}

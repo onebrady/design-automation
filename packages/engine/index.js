@@ -15,21 +15,21 @@ function buildLookup(tokens = {}) {
   const spacing = tokens?.spacing?.tokens || {};
   for (const [k, v] of Object.entries(spacing)) {
     const val = typeof v === 'string' ? v : v.value;
-    if (val) spacingMap.set(k, val);
+    if (val) spacingMap.set(val, k); // value → name mapping for lookup
   }
 
   const radiusMap = new Map();
   const radii = tokens?.radii || {};
   for (const [k, v] of Object.entries(radii)) {
     const val = typeof v === 'string' ? v : v.value;
-    if (val) radiusMap.set(k, val);
+    if (val) radiusMap.set(val, k); // value → name mapping for lookup
   }
 
   const elevationMap = new Map();
   const elevation = tokens?.elevation || {};
   for (const [k, v] of Object.entries(elevation)) {
     const val = typeof v === 'string' ? v : v.value;
-    if (val) elevationMap.set(k, val);
+    if (val) elevationMap.set(val, k); // value → name mapping for lookup
   }
 
   return { colorMap, spacingMap, radiusMap, elevationMap };
@@ -53,18 +53,18 @@ function withinTolerance(target, candidate, tol = 0.05) {
 
 function nearestSpacingToken(value, spacingMap) {
   // value like '16px' or '1rem'
-  let best = null;
-  for (const [name, tokenVal] of spacingMap.entries()) {
+  // spacingMap now has value → name mapping
+  for (const [tokenVal, name] of spacingMap.entries()) {
     if (withinTolerance(tokenVal, value)) {
-      best = name;
-      break;
+      return name;
     }
   }
-  return best;
+  return null;
 }
 
 function nearestRadiusToken(value, radiusMap) {
-  for (const [name, tokenVal] of radiusMap.entries()) {
+  // radiusMap now has value → name mapping  
+  for (const [tokenVal, name] of radiusMap.entries()) {
     if (withinTolerance(tokenVal, value)) return name;
   }
   return null;
@@ -78,7 +78,7 @@ function enhanceCss({ code, tokens = {}, filePath = '', maxChanges = 5, ignoreMa
     return { code, changes: [] };
   }
   const { colorMap, spacingMap, radiusMap, elevationMap } = buildLookup(tokens);
-  let changes = [];
+  const changes = [];
   let out = code;
   let applied = 0;
 
@@ -128,7 +128,8 @@ function enhanceCss({ code, tokens = {}, filePath = '', maxChanges = 5, ignoreMa
   // Elevation normalization (exact match only, safe)
   out = out.replace(/box-shadow\s*:\s*([^;]+);/g, (m, val) => {
     if (applied >= maxChanges) return m;
-    for (const [name, tokenVal] of elevationMap.entries()) {
+    // elevationMap now has value → name mapping
+    for (const [tokenVal, name] of elevationMap.entries()) {
       if (String(val).trim() === String(tokenVal).trim()) {
         const after = `box-shadow: var(--elevation-${name});`;
         changes.push({ type: 'elevation-normalization', before: m, after, location: 'css:box-shadow' });
@@ -142,4 +143,72 @@ function enhanceCss({ code, tokens = {}, filePath = '', maxChanges = 5, ignoreMa
   return { code: out, changes };
 }
 
-module.exports = { enhanceCss };
+// Export advanced transformation systems
+const { TypographyScaleSystem } = require('./typography');
+const { AnimationTokenSystem } = require('./animations');
+const { GradientSystem } = require('./gradients');
+const { StateVariationSystem } = require('./states');
+const { CompositionalTransformSystem } = require('./compositor');
+const { CSSOptimizer } = require('./optimizer');
+
+// Advanced transformation function with all systems
+function enhanceAdvanced({ code, tokens = {}, filePath = '', options = {} }) {
+  const compositor = new CompositionalTransformSystem();
+  
+  return compositor.composeTransformations(code, tokens, {
+    filePath,
+    enableTypography: options.enableTypography !== false,
+    enableAnimations: options.enableAnimations !== false,
+    enableGradients: options.enableGradients !== false,
+    enableStates: options.enableStates !== false,
+    enableOptimization: options.enableOptimization !== false,
+    ...options
+  });
+}
+
+// Typography-focused enhancement
+function enhanceTypography({ code, tokens = {}, filePath = '' }) {
+  const typography = new TypographyScaleSystem();
+  return typography.transformTypography(code, tokens);
+}
+
+// Animation-focused enhancement
+function enhanceAnimations({ code, tokens = {}, filePath = '' }) {
+  const animations = new AnimationTokenSystem();
+  return animations.transformAnimations(code, tokens);
+}
+
+// Gradient-focused enhancement
+function enhanceGradients({ code, tokens = {}, filePath = '' }) {
+  const gradients = new GradientSystem();
+  return gradients.transformGradients(code, tokens);
+}
+
+// State variations enhancement
+function enhanceStates({ code, tokens = {}, filePath = '' }) {
+  const states = new StateVariationSystem();
+  return states.transformStateVariations(code, tokens);
+}
+
+// CSS optimization only
+function optimizeCSS({ code, level = 2, options = {} }) {
+  const optimizer = new CSSOptimizer({ level, ...options });
+  return optimizer.optimize(code);
+}
+
+module.exports = { 
+  enhanceCss,
+  enhanceAdvanced,
+  enhanceTypography,
+  enhanceAnimations,
+  enhanceGradients,
+  enhanceStates,
+  optimizeCSS,
+  // Export transformation classes for direct use
+  TypographyScaleSystem,
+  AnimationTokenSystem,
+  GradientSystem,
+  StateVariationSystem,
+  CompositionalTransformSystem,
+  CSSOptimizer
+};

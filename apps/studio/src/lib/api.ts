@@ -36,5 +36,10 @@ export const api = {
   // Dev-only management (served by Vite middleware)
   manageStatus: () => fetchJSON('/manage/status'),
   manageStart: () => fetchJSON('/manage/start'),
-  manageStop: () => fetchJSON('/manage/stop')
+  manageStop: () => fetchJSON('/manage/stop'),
+  
+  // Phase 8: Component Generation
+  generateComponent: (payload: any) => fetchJSON('/api/design/generate-component', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+  listTemplates: () => fetchJSON('/api/design/templates'),
+  customizeTemplate: (payload: any) => fetchJSON('/api/design/customize-template', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
 }

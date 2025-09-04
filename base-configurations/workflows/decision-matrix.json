@@ -1,0 +1,360 @@
+{
+  "version": "1.0.0",
+  "description": "Structured decision matrix for AI agents working with the design automation system",
+  "lastUpdated": "2024-01-15",
+  
+  "projectTypeDecisions": {
+    "web-application": {
+      "indicators": [
+        "user interface forms",
+        "authentication system", 
+        "data management",
+        "user dashboard",
+        "CRUD operations"
+      ],
+      "template": "web-app",
+      "brandPackType": "web-application",
+      "recommendedFeatures": [
+        "typography",
+        "colors",
+        "spacing", 
+        "semantics",
+        "components",
+        "layout"
+      ],
+      "defaultPersonality": {
+        "modern_traditional": 7,
+        "playful_serious": 5,
+        "minimal_decorative": 7,
+        "trustworthy_innovative": 6,
+        "casual_professional": 6,
+        "energetic_calm": 5
+      }
+    },
+    "component-library": {
+      "indicators": [
+        "reusable components",
+        "design system",
+        "npm package",
+        "storybook",
+        "documentation focus"
+      ],
+      "template": "component-library", 
+      "brandPackType": "component-library",
+      "recommendedFeatures": [
+        "typography",
+        "colors",
+        "spacing",
+        "components",
+        "semantics"
+      ],
+      "defaultPersonality": {
+        "modern_traditional": 7,
+        "playful_serious": 4,
+        "minimal_decorative": 8,
+        "trustworthy_innovative": 5,
+        "casual_professional": 6,
+        "energetic_calm": 4
+      }
+    },
+    "marketing-site": {
+      "indicators": [
+        "landing pages",
+        "conversion optimization",
+        "hero sections",
+        "call to action buttons",
+        "SEO requirements"
+      ],
+      "template": "marketing-site",
+      "brandPackType": "marketing-site", 
+      "recommendedFeatures": [
+        "typography",
+        "colors",
+        "spacing",
+        "animations",
+        "gradients",
+        "semantics",
+        "components"
+      ],
+      "defaultPersonality": {
+        "modern_traditional": 8,
+        "playful_serious": 6,
+        "minimal_decorative": 6,
+        "trustworthy_innovative": 7,
+        "casual_professional": 4,
+        "energetic_calm": 7
+      }
+    },
+    "dashboard": {
+      "indicators": [
+        "data visualization",
+        "charts and graphs",
+        "admin interface",
+        "analytics",
+        "data tables"
+      ],
+      "template": "dashboard",
+      "brandPackType": "dashboard",
+      "recommendedFeatures": [
+        "typography",
+        "colors", 
+        "spacing",
+        "semantics",
+        "components",
+        "layout"
+      ],
+      "defaultPersonality": {
+        "modern_traditional": 6,
+        "playful_serious": 3,
+        "minimal_decorative": 8,
+        "trustworthy_innovative": 5,
+        "casual_professional": 7,
+        "energetic_calm": 3
+      }
+    }
+  },
+  
+  "enhancementDecisions": {
+    "autoApplyRules": {
+      "safe": {
+        "conditions": [
+          "development environment",
+          "file size < 1000 lines",
+          "changes count <= 5",
+          "no vendor prefixes",
+          "no !important declarations"
+        ],
+        "action": "auto-apply",
+        "endpoint": "POST /api/design/enhance-cached"
+      },
+      "manual": {
+        "conditions": [
+          "production environment",
+          "file size > 1000 lines", 
+          "changes count > 5",
+          "contains vendor code",
+          "custom animations present"
+        ],
+        "action": "require-approval",
+        "endpoint": "GET /api/design/suggest-proactive"
+      },
+      "off": {
+        "conditions": [
+          "user explicitly disabled",
+          "legacy code base",
+          "CI/CD environment",
+          "performance critical path"
+        ],
+        "action": "skip-enhancement",
+        "endpoint": null
+      }
+    },
+    
+    "batchProcessingTriggers": {
+      "enabled": {
+        "conditions": [
+          "file count > 3",
+          "total size > 50kb",
+          "similar file types",
+          "shared brand pack"
+        ],
+        "endpoint": "POST /api/design/enhance-batch",
+        "maxConcurrent": 3
+      },
+      "disabled": {
+        "conditions": [
+          "single file",
+          "real-time feedback needed",
+          "experimental changes",
+          "different brand packs"
+        ],
+        "endpoint": "POST /api/design/enhance",
+        "maxConcurrent": 1
+      }
+    }
+  },
+  
+  "brandPackDecisions": {
+    "creation": {
+      "newProject": {
+        "conditions": [
+          "no existing brand pack",
+          "clean slate project",
+          "unique brand requirements"
+        ],
+        "action": "create-new",
+        "endpoint": "POST /api/brand-packs",
+        "dataSource": "project-analysis"
+      },
+      "inheritance": {
+        "conditions": [
+          "similar existing project",
+          "brand consistency needed",
+          "time constraints"
+        ],
+        "action": "inherit-and-modify",
+        "endpoint": "POST /api/brand-packs/fork",
+        "dataSource": "existing-brand-pack"
+      }
+    },
+    
+    "selection": {
+      "exactMatch": {
+        "conditions": [
+          "brand pack ID specified",
+          "direct project mapping",
+          "configuration override"
+        ],
+        "action": "use-specified",
+        "endpoint": "GET /api/brand-packs/{id}"
+      },
+      "autoResolve": {
+        "conditions": [
+          "single brand pack in project",
+          "clear project context",
+          "no conflicts detected"
+        ],
+        "action": "auto-resolve",
+        "endpoint": "GET /api/context"
+      },
+      "fallback": {
+        "conditions": [
+          "no brand pack found",
+          "resolution failed", 
+          "emergency recovery"
+        ],
+        "action": "use-default",
+        "endpoint": "GET /api/brand-packs/default"
+      }
+    }
+  },
+  
+  "featureEnablement": {
+    "typography": {
+      "alwaysEnable": ["web-application", "marketing-site", "dashboard", "component-library"],
+      "conditions": {
+        "webfonts": ["marketing-site", "component-library"],
+        "enforceScale": ["component-library", "dashboard"],
+        "headingOptimization": ["marketing-site"]
+      }
+    },
+    "colors": {
+      "alwaysEnable": ["web-application", "marketing-site", "dashboard", "component-library"],
+      "conditions": {
+        "contrastChecking": ["web-application", "dashboard", "component-library"],
+        "conversionOptimization": ["marketing-site"]
+      }
+    },
+    "animations": {
+      "enable": ["marketing-site", "web-application"],
+      "disable": ["dashboard", "component-library"],
+      "conditions": {
+        "respectMotionPreference": ["web-application", "marketing-site"],
+        "conversionAnimations": ["marketing-site"]
+      }
+    },
+    "gradients": {
+      "enable": ["marketing-site"],
+      "disable": ["dashboard", "component-library"],
+      "optional": ["web-application"]
+    }
+  },
+  
+  "performanceDecisions": {
+    "cacheStrategy": {
+      "aggressive": {
+        "projectTypes": ["marketing-site", "component-library"],
+        "conditions": ["static content", "infrequent changes"],
+        "cacheExpiry": 7200
+      },
+      "moderate": {
+        "projectTypes": ["web-application", "dashboard"],
+        "conditions": ["dynamic content", "regular updates"],
+        "cacheExpiry": 3600
+      },
+      "minimal": {
+        "projectTypes": ["development"],
+        "conditions": ["frequent changes", "real-time updates"],
+        "cacheExpiry": 900
+      }
+    },
+    
+    "concurrency": {
+      "high": {
+        "conditions": ["marketing-site", "batch processing", "CI/CD"],
+        "maxConcurrent": 5
+      },
+      "medium": {
+        "conditions": ["web-application", "component-library"],
+        "maxConcurrent": 3
+      },
+      "low": {
+        "conditions": ["dashboard", "development", "limited resources"],
+        "maxConcurrent": 2
+      }
+    }
+  },
+  
+  "errorHandling": {
+    "brandPackNotFound": {
+      "recovery": [
+        "check project context",
+        "use fallback brand pack", 
+        "create minimal brand pack",
+        "prompt user for selection"
+      ],
+      "preventive": [
+        "validate brand pack ID before use",
+        "cache brand pack availability",
+        "provide clear error messages"
+      ]
+    },
+    "enhancementFailed": {
+      "recovery": [
+        "revert to original CSS",
+        "apply partial enhancements",
+        "skip problematic sections",
+        "log for manual review"
+      ],
+      "preventive": [
+        "validate CSS syntax before enhancement",
+        "check file size limits",
+        "verify brand pack completeness"
+      ]
+    },
+    "apiUnavailable": {
+      "recovery": [
+        "use cached results",
+        "degrade to basic functionality",
+        "queue requests for retry",
+        "notify user of limitations"
+      ],
+      "preventive": [
+        "implement health checks",
+        "use circuit breaker pattern",
+        "maintain local fallbacks"
+      ]
+    }
+  },
+  
+  "integrationPatterns": {
+    "vite": {
+      "plugin": "@agentic/vite-plugin",
+      "hotReload": true,
+      "sourceMap": "development-only",
+      "cacheStrategy": "moderate"
+    },
+    "webpack": {
+      "plugin": "@agentic/webpack-plugin", 
+      "hotReload": true,
+      "sourceMap": "development-only",
+      "cacheStrategy": "aggressive"
+    },
+    "rollup": {
+      "plugin": "@agentic/rollup-plugin",
+      "hotReload": false,
+      "sourceMap": false,
+      "cacheStrategy": "aggressive"
+    }
+  }
+}

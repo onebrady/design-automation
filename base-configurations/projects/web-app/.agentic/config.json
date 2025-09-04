@@ -1,0 +1,140 @@
+{
+  "name": "Web Application Template",
+  "version": "1.0.0",
+  "type": "web-application",
+  "description": "Modern web application with AI-driven design automation",
+  
+  "brandPack": {
+    "id": "{{BRAND_PACK_ID}}",
+    "autoResolve": true,
+    "fallback": "default-web-app"
+  },
+  
+  "enhancement": {
+    "level": "balanced",
+    "autoApply": "safe",
+    "batchProcessing": true,
+    "preserveCustomizations": true
+  },
+  
+  "features": {
+    "typography": {
+      "enabled": true,
+      "enforceScale": true,
+      "webfonts": true
+    },
+    "colors": {
+      "enabled": true,
+      "enforceTokens": true,
+      "contrastChecking": true
+    },
+    "spacing": {
+      "enabled": true,
+      "enforceScale": true,
+      "responsive": true
+    },
+    "animations": {
+      "enabled": true,
+      "respectMotionPreference": true,
+      "maxDuration": "1s"
+    },
+    "gradients": {
+      "enabled": false,
+      "fallbackColors": true
+    },
+    "semantics": {
+      "enabled": true,
+      "accessibility": true,
+      "seo": true,
+      "wcagLevel": "AA"
+    },
+    "components": {
+      "generation": true,
+      "enhancement": true,
+      "patterns": true
+    },
+    "layout": {
+      "analysis": true,
+      "responsive": true,
+      "gridSystems": true
+    }
+  },
+  
+  "performance": {
+    "cacheStrategy": "aggressive",
+    "maxConcurrent": 3,
+    "timeout": 30000,
+    "retries": 2,
+    "cacheExpiry": 3600,
+    "batchSize": 10
+  },
+  
+  "development": {
+    "hotReload": true,
+    "sourceMap": true,
+    "validation": "strict",
+    "logging": "info"
+  },
+  
+  "build": {
+    "optimization": true,
+    "minification": true,
+    "purgeUnused": true,
+    "generateReport": true
+  },
+  
+  "team": {
+    "sharedPatterns": true,
+    "conflictResolution": "ask",
+    "reviewRequired": false,
+    "metricsCollection": true
+  },
+  
+  "integration": {
+    "framework": "auto-detect",
+    "buildTools": ["vite", "webpack", "rollup"],
+    "ci": {
+      "enabled": false,
+      "failOnErrors": true,
+      "generateDiff": true
+    }
+  },
+  
+  "files": {
+    "include": [
+      "src/**/*.{css,scss,sass,less}",
+      "components/**/*.{css,scss,sass,less}",
+      "styles/**/*.{css,scss,sass,less}"
+    ],
+    "exclude": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "**/*.min.css",
+      "**/*.generated.css"
+    ],
+    "ignore": [
+      "/* agentic:ignore */",
+      "/* no-enhance */"
+    ]
+  },
+  
+  "rules": {
+    "maxChangesPerFile": 10,
+    "preserveVendor": true,
+    "respectImportant": true,
+    "maintainSpecificity": true
+  },
+  
+  "reporting": {
+    "enabled": true,
+    "format": ["json", "html"],
+    "destination": "reports/design-automation",
+    "metrics": [
+      "token-adoption",
+      "accessibility-score", 
+      "performance-impact",
+      "pattern-consistency"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "id": "acme",
+  "id": "redis-test-brand",
   "version": "1.0.0",
   "etag": null,
-  "lastSync": "2025-09-01T00:08:30Z",
-  "source": "mongo"
+  "lastSync": "2025-09-04T12:44:45.955Z",
+  "source": "redis"
 }

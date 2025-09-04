@@ -1,0 +1,112 @@
+{
+  "name": "your-web-app-name",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web application with AI-driven design automation",
+  
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "agentic:enhance": "agentic-enhance src/",
+    "agentic:analyze": "agentic-analyze src/",
+    "agentic:validate": "agentic-validate",
+    "agentic:report": "agentic-report",
+    "design:tokens": "agentic tokens export --format=css",
+    "design:components": "agentic components generate",
+    "design:audit": "agentic audit --accessibility --performance"
+  },
+  
+  "dependencies": {
+    "@agentic/design-sdk": "^1.0.0"
+  },
+  
+  "devDependencies": {
+    "@agentic/vite-plugin": "^1.0.0",
+    "vite": "^5.0.0"
+  },
+  
+  "agentic": {
+    "enabled": true,
+    "configPath": ".agentic/config.json",
+    "brandPackId": "{{BRAND_PACK_ID}}",
+    
+    "enhancement": {
+      "autoApply": "safe",
+      "watchMode": true,
+      "batchProcessing": true
+    },
+    
+    "build": {
+      "integration": true,
+      "optimization": true,
+      "reporting": true
+    },
+    
+    "development": {
+      "hotReload": true,
+      "validation": "strict",
+      "sourceMap": true
+    },
+    
+    "patterns": {
+      "learning": true,
+      "sharing": true,
+      "suggestions": true
+    },
+    
+    "features": [
+      "typography",
+      "colors", 
+      "spacing",
+      "animations",
+      "semantics",
+      "components",
+      "layout"
+    ],
+    
+    "files": {
+      "include": [
+        "src/**/*.{css,scss,sass,less}",
+        "components/**/*.{css,scss,sass,less}",
+        "styles/**/*.{css,scss,sass,less}"
+      ],
+      "exclude": [
+        "node_modules/**",
+        "dist/**", 
+        "build/**",
+        "**/*.min.css"
+      ]
+    },
+    
+    "reporting": {
+      "enabled": true,
+      "destination": "reports/design-automation",
+      "formats": ["json", "html"],
+      "metrics": [
+        "token-adoption",
+        "accessibility-score",
+        "performance-impact", 
+        "pattern-consistency"
+      ]
+    },
+    
+    "ci": {
+      "enabled": false,
+      "failOnErrors": true,
+      "generateDiff": true,
+      "reportPath": "reports/ci-design-report.json"
+    }
+  },
+  
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

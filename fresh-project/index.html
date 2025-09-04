@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 8 Design System - Comprehensive API Test Dashboard</title>
+    <meta name="description" content="Complete testing suite for all 64 Phase 8 design system API endpoints">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="brand-title">Phase 8 Design System</h1>
+                    <span class="brand-subtitle">Comprehensive API Test Dashboard (64 Endpoints)</span>
+                </div>
+                <div class="system-status">
+                    <div class="status-item" id="api-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Checking API...</span>
+                    </div>
+                    <div class="test-progress" id="test-progress">
+                        <span class="progress-text">Tests: <span id="tests-run">0</span>/<span id="total-tests">64</span></span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- Overview Section -->
+            <section class="overview-section">
+                <h2 class="section-title">API Coverage Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-endpoints">64</div>
+                        <div class="stat-label">Total Endpoints</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="tested-endpoints">3</div>
+                        <div class="stat-label">Previously Tested</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="coverage-percent">4.7%</div>
+                        <div class="stat-label">Coverage Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="untested-endpoints">61</div>
+                        <div class="stat-label">Untested Endpoints</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Category Testing Sections -->
+            <div class="test-categories">
+                
+                <!-- 1. System Health & Core -->
+                <section class="test-category" data-category="system">
+                    <div class="category-header">
+                        <h3 class="category-title">🔍 System Health & Core (4 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('system')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/health</span>
+                                <span class="test-description">System health check</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/health', 'system-health')">Test</button>
+                                <span class="test-status" id="system-health">⏳</span>
+                            </div>
+                        </div>
+                        
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/context</span>
+                                <span class="test-description">Project context resolution</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/context', 'system-context')">Test</button>
+                                <span class="test-status" id="system-context">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/lock</span>
+                                <span class="test-description">Brand pack lock file</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/lock', 'system-lock')">Test</button>
+                                <span class="test-status" id="system-lock">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/project-config</span>
+                                <span class="test-description">Project configuration</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/project-config', 'system-config')">Test</button>
+                                <span class="test-status" id="system-config">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Brand Pack Management -->
+                <section class="test-category" data-category="brand-packs">
+                    <div class="category-header">
+                        <h3 class="category-title">🎨 Brand Pack Management (9 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('brand-packs')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/brand-packs</span>
+                                <span class="test-description">List all brand packs</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/brand-packs', 'brand-list')">Test</button>
+                                <span class="test-status" id="brand-list">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/brand-packs/western-companies</span>
+                                <span class="test-description">Get specific brand pack</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/brand-packs/western-companies', 'brand-get')">Test</button>
+                                <span class="test-status" id="brand-get">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/brand-packs/western-companies/export/css</span>
+                                <span class="test-description">Export brand pack as CSS</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/brand-packs/western-companies/export/css', 'brand-export-css')">Test</button>
+                                <span class="test-status" id="brand-export-css">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/brand-packs/western-companies/export/json</span>
+                                <span class="test-description">Export brand pack as JSON</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/brand-packs/western-companies/export/json', 'brand-export-json')">Test</button>
+                                <span class="test-status" id="brand-export-json">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/brand-packs/western-companies/versions</span>
+                                <span class="test-description">Get brand pack versions</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/brand-packs/western-companies/versions', 'brand-versions')">Test</button>
+                                <span class="test-status" id="brand-versions">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. CSS Enhancement Engine -->
+                <section class="test-category" data-category="design-enhance">
+                    <div class="category-header">
+                        <h3 class="category-title">🔧 CSS Enhancement Engine (12 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('design-enhance')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <!-- Include previously tested ones -->
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance</span>
+                                <span class="test-description">Basic CSS enhancement</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance')">Test</button>
+                                <span class="test-status" id="enhance-basic">✅</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-cached</span>
+                                <span class="test-description">Cached enhancement</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-cached')">Test</button>
+                                <span class="test-status" id="enhance-cached">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-advanced</span>
+                                <span class="test-description">Advanced enhancement features</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-advanced')">Test</button>
+                                <span class="test-status" id="enhance-advanced">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-typography</span>
+                                <span class="test-description">Typography enhancement</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-typography')">Test</button>
+                                <span class="test-status" id="enhance-typography">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-gradients</span>
+                                <span class="test-description">Gradient enhancement</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-gradients')">Test</button>
+                                <span class="test-status" id="enhance-gradients">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-animations</span>
+                                <span class="test-description">Animation enhancement</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-animations')">Test</button>
+                                <span class="test-status" id="enhance-animations">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/enhance-states</span>
+                                <span class="test-description">State enhancement (hover, focus, etc.)</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('enhance-states')">Test</button>
+                                <span class="test-status" id="enhance-states">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/optimize</span>
+                                <span class="test-description">CSS optimization pipeline</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEnhancement('optimize')">Test</button>
+                                <span class="test-status" id="enhance-optimize">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. AI Component Generation -->
+                <section class="test-category" data-category="ai-generation">
+                    <div class="category-header">
+                        <h3 class="category-title">🤖 AI Component Generation (8 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('ai-generation')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/generate-component</span>
+                                <span class="test-description">Generate component from description</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testComponentGeneration()">Test</button>
+                                <span class="test-status" id="generate-component">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/design/templates</span>
+                                <span class="test-description">List available templates</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/design/templates', 'design-templates')">Test</button>
+                                <span class="test-status" id="design-templates">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/design/preview-component</span>
+                                <span class="test-description">Generate component preview</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testComponentPreview()">Test</button>
+                                <span class="test-status" id="preview-component">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/brand-packs/generate-from-logo</span>
+                                <span class="test-description">Generate brand pack from logo</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testLogoGeneration()">Test</button>
+                                <span class="test-status" id="logo-generation">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Layout Intelligence -->
+                <section class="test-category" data-category="layout">
+                    <div class="category-header">
+                        <h3 class="category-title">📐 Layout Intelligence (8 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('layout')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/layout/analyze</span>
+                                <span class="test-description">Analyze existing layout</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testLayoutAnalysis()">Test</button>
+                                <span class="test-status" id="layout-analyze">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/layout/generate-grid</span>
+                                <span class="test-description">Generate responsive grid</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testGridGeneration()">Test</button>
+                                <span class="test-status" id="layout-grid">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">GET</span>
+                                <span class="test-endpoint">/api/layout/templates</span>
+                                <span class="test-description">Get layout templates</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testEndpoint('GET', '/api/layout/templates', 'layout-templates')">Test</button>
+                                <span class="test-status" id="layout-templates">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. Semantic Analysis -->
+                <section class="test-category" data-category="semantic">
+                    <div class="category-header">
+                        <h3 class="category-title">🧠 Semantic Analysis (14 endpoints)</h3>
+                        <button class="test-category-btn" onclick="testCategory('semantic')">Test All</button>
+                    </div>
+                    <div class="category-tests">
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/semantic/analyze</span>
+                                <span class="test-description">Comprehensive semantic analysis</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testSemanticAnalysis()">Test</button>
+                                <span class="test-status" id="semantic-analyze">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/semantic/analyze-accessibility</span>
+                                <span class="test-description">Accessibility analysis</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testAccessibilityAnalysis()">Test</button>
+                                <span class="test-status" id="semantic-a11y">⏳</span>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-info">
+                                <span class="test-method">POST</span>
+                                <span class="test-endpoint">/api/semantic/detect-components</span>
+                                <span class="test-description">Component detection</span>
+                            </div>
+                            <div class="test-controls">
+                                <button class="test-btn" onclick="testComponentDetection()">Test</button>
+                                <span class="test-status" id="semantic-components">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <h2 class="section-title">Test Results & Analysis</h2>
+                <div class="results-container">
+                    <div class="results-tabs">
+                        <button class="tab-btn active" onclick="showResultsTab('summary')">Summary</button>
+                        <button class="tab-btn" onclick="showResultsTab('details')">Detailed Results</button>
+                        <button class="tab-btn" onclick="showResultsTab('performance')">Performance</button>
+                        <button class="tab-btn" onclick="showResultsTab('issues')">Issues Found</button>
+                    </div>
+
+                    <div class="tab-content active" id="summary-tab">
+                        <div class="summary-stats">
+                            <h3>Testing Progress</h3>
+                            <div class="progress-summary">
+                                <div class="stat-row">
+                                    <span>Endpoints Tested:</span>
+                                    <span id="summary-tested">0 / 64</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Success Rate:</span>
+                                    <span id="summary-success">0%</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Average Response Time:</span>
+                                    <span id="summary-response">-- ms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="details-tab">
+                        <div class="detailed-results" id="detailed-results">
+                            <p>Run tests to see detailed results here...</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="performance-tab">
+                        <div class="performance-metrics" id="performance-metrics">
+                            <p>Performance metrics will appear here after testing...</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="issues-tab">
+                        <div class="issues-list" id="issues-list">
+                            <p>Issues and recommendations will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+        <div class="container">
+            <div class="action-buttons">
+                <button class="action-btn action-btn-primary" onclick="runAllTests()">🚀 Run All Tests</button>
+                <button class="action-btn" onclick="runCriticalTests()">⚡ Critical Tests Only</button>
+                <button class="action-btn" onclick="generateReport()">📊 Generate Report</button>
+                <button class="action-btn" onclick="resetAllTests()">🔄 Reset All</button>
+            </div>
+            <div class="action-info">
+                <span class="action-text">Ready to comprehensively test all 64 API endpoints</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="comprehensive-test.js"></script>
+</body>
+</html>

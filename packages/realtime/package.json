@@ -1,0 +1,19 @@
+{
+  "name": "@agentic/realtime",
+  "version": "1.0.0",
+  "description": "Real-time file watching, WebSocket communication, and streaming enhancements for Agentic design system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["design-system", "real-time", "websocket", "file-watcher", "streaming"],
+  "author": "Agentic",
+  "license": "MIT",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.8"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "phases": [
+    { "id": "phase-0", "doc": "development plan/phase-0.md", "tasks": "development plan/phase-0.tasks.json" },
+    { "id": "phase-1", "doc": "development plan/phase-1.md", "tasks": "development plan/phase-1.tasks.json" },
+    { "id": "phase-2", "doc": "development plan/phase-2.md", "tasks": "development plan/phase-2.tasks.json" },
+    { "id": "phase-3", "doc": "development plan/phase-3.md", "tasks": "development plan/phase-3.tasks.json" },
+    { "id": "phase-4", "doc": "development plan/phase-4.md", "tasks": "development plan/phase-4.tasks.json" },
+    { "id": "phase-5", "doc": "development plan/phase-5.md", "tasks": "development plan/phase-5.tasks.json" },
+    { "id": "phase-6", "doc": "development plan/phase-6.md", "tasks": "development plan/phase-6.tasks.json" },
+    { "id": "phase-7", "doc": "development plan/phase-7.md", "tasks": "development plan/phase-7.tasks.json" },
+    { "id": "phase-8", "doc": "development-plan/phase-8.md", "tasks": "development-plan/phase-8.tasks.json" },
+    { "id": "phase-9", "doc": "development plan/phase-9.md", "tasks": "development plan/phase-9.tasks.json" }
+  ]
+}

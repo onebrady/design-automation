@@ -1,0 +1,27 @@
+{
+  "brandPackId": "western-companies",
+  "brandVersion": "1.0.0",
+  "projectId": "ai-agent-template",
+  "overrides": {},
+  "features": {
+    "autoEnhance": true,
+    "caching": true,
+    "patternLearning": true,
+    "semanticAnalysis": true
+  },
+  "qualityGates": {
+    "minBrandCompliance": 0.8,
+    "minAccessibilityScore": "AA",
+    "maxChangesPerFile": 50,
+    "requireValidation": true
+  },
+  "performance": {
+    "cacheStrategy": "aggressive",
+    "parallelRequests": true,
+    "timeoutMs": {
+      "default": 5000,
+      "aiGeneration": 30000,
+      "batchOperations": 10000
+    }
+  }
+}

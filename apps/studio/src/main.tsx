@@ -2,11 +2,12 @@ import React from 'react'
 import './style.css'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './routes/App'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import App from './routes/App'
 import { ThemeProvider } from './lib/theme'
 import Dashboard from './routes/Dashboard'
 import BrandPacks from './routes/BrandPacks'
+import Generate from './routes/Generate'
 import Playground from './routes/Playground'
 import Suggestions from './routes/Suggestions'
 import Analytics from './routes/Analytics'
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'brand-packs', element: <BrandPacks /> },
+      { path: 'generate', element: <Generate /> },
       { path: 'playground', element: <Playground /> },
       { path: 'suggestions', element: <Suggestions /> },
       { path: 'analytics', element: <Analytics /> },

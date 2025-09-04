@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2025-09-01T02:47:10.022Z",
+  "generatedAt": "2025-09-01T16:05:02.260Z",
   "ctx": {
-    "degraded": true,
-    "mongoAvailable": false
+    "degraded": false,
+    "mongoAvailable": true
   },
   "statusEvents": [
     {
-      "mongoAvailable": false,
-      "degraded": true,
-      "at": "2025-09-01T02:47:10.020Z"
+      "mongoAvailable": true,
+      "degraded": false,
+      "at": "2025-09-01T16:05:02.252Z"
     }
   ],
   "enhance": {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { Upload, Sparkles, Plus, Package, Eye, Trash2, X } from 'lucide-react'
 import { api } from '../lib/api'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { Upload, Sparkles, Plus, Package, Eye, Trash2, X } from 'lucide-react'
 
 interface BrandPack {
   id: string

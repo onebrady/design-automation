@@ -1,0 +1,153 @@
+{
+  "name": "Dashboard Template",
+  "version": "1.0.0",
+  "type": "dashboard",
+  "description": "Data dashboard application with AI-driven design automation",
+  
+  "brandPack": {
+    "id": "{{BRAND_PACK_ID}}",
+    "autoResolve": true,
+    "fallback": "default-dashboard"
+  },
+  
+  "enhancement": {
+    "level": "balanced",
+    "autoApply": "safe",
+    "batchProcessing": true,
+    "preserveCustomizations": true
+  },
+  
+  "features": {
+    "typography": {
+      "enabled": true,
+      "enforceScale": true,
+      "webfonts": true,
+      "dataLabels": true
+    },
+    "colors": {
+      "enabled": true,
+      "enforceTokens": true,
+      "contrastChecking": true,
+      "dataVisualization": true
+    },
+    "spacing": {
+      "enabled": true,
+      "enforceScale": true,
+      "responsive": true,
+      "dashboardLayouts": true
+    },
+    "animations": {
+      "enabled": true,
+      "respectMotionPreference": true,
+      "maxDuration": "400ms",
+      "dataTransitions": true
+    },
+    "gradients": {
+      "enabled": false,
+      "fallbackColors": true
+    },
+    "semantics": {
+      "enabled": true,
+      "accessibility": true,
+      "seo": false,
+      "wcagLevel": "AA"
+    },
+    "components": {
+      "generation": true,
+      "enhancement": true,
+      "patterns": true,
+      "dashboardComponents": true
+    },
+    "layout": {
+      "analysis": true,
+      "responsive": true,
+      "gridSystems": true,
+      "dashboardLayouts": true
+    }
+  },
+  
+  "dashboard": {
+    "charts": {
+      "colorPalettes": true,
+      "responsiveCharts": true,
+      "accessibility": true,
+      "dataLabeling": true
+    },
+    "layout": {
+      "gridSystem": "css-grid",
+      "breakpoints": true,
+      "sidebar": true,
+      "navigation": true
+    },
+    "theming": {
+      "darkMode": true,
+      "lightMode": true,
+      "autoSwitch": true
+    },
+    "performance": {
+      "virtualScrolling": true,
+      "lazyLoading": true,
+      "dataOptimization": true
+    }
+  },
+  
+  "performance": {
+    "cacheStrategy": "moderate",
+    "maxConcurrent": 4,
+    "timeout": 25000,
+    "retries": 2,
+    "cacheExpiry": 2400,
+    "batchSize": 12
+  },
+  
+  "development": {
+    "hotReload": true,
+    "sourceMap": true,
+    "validation": "balanced",
+    "logging": "info"
+  },
+  
+  "build": {
+    "optimization": true,
+    "minification": true,
+    "purgeUnused": true,
+    "generateReport": true
+  },
+  
+  "files": {
+    "include": [
+      "src/**/*.{css,scss,sass,less}",
+      "src/**/*.{js,jsx,ts,tsx}",
+      "components/**/*.{css,scss,sass,less}"
+    ],
+    "exclude": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "coverage/**",
+      "**/*.min.css"
+    ]
+  },
+  
+  "accessibility": {
+    "enabled": true,
+    "wcagLevel": "AA",
+    "testing": true,
+    "reporting": true,
+    "validation": "strict",
+    "dataVisualization": true
+  },
+  
+  "reporting": {
+    "enabled": true,
+    "format": ["json", "html"],
+    "destination": "reports/dashboard-automation",
+    "metrics": [
+      "accessibility-score",
+      "performance-score",
+      "data-visualization-compliance",
+      "token-adoption",
+      "component-consistency"
+    ]
+  }
+}
