@@ -8,6 +8,8 @@ const express = require('express');
 const { corsMiddleware } = require('./middleware/cors');
 const { readJsonSafe } = require('./utils/files');
 const { ErrorResponse } = require('./middleware/error-handler');
+const { healthCheckFilter, errorLoggingMiddleware } = require('./middleware/logging');
+const Logger = require('./utils/logger');
 
 // Import route modules
 const healthRoutes = require('./routes/health');
@@ -26,8 +28,16 @@ async function main() {
   app.use(express.json());
   app.use(corsMiddleware);
   
+  // Logging middleware (with health check filtering)
+  app.use(healthCheckFilter);
+  
   const pkg = readJsonSafe(path.join(process.cwd(), 'package.json')) || { version: '0.0.0' };
-  console.log(`Starting Agentic Design API Server v${pkg.version} on port ${PORT}`);
+  Logger.info('Starting Agentic Design API Server', {
+    version: pkg.version,
+    port: PORT,
+    nodeEnv: process.env.NODE_ENV || 'development',
+    logLevel: process.env.LOG_LEVEL || 'debug'
+  });
 
   // Mount route modules
   app.use('/api', healthRoutes);
@@ -40,20 +50,26 @@ async function main() {
   // 404 handler for unknown endpoints
   app.use(ErrorResponse.notFound);
 
+  // Error logging middleware
+  app.use(errorLoggingMiddleware);
+
   // Global error handling middleware
   app.use(ErrorResponse.handle);
 
   // Start server
   const server = app.listen(PORT, () => {
-    console.log(`✅ Server running on port ${PORT}`);
-    console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+    Logger.info('Server started successfully', {
+      port: PORT,
+      healthCheck: `http://localhost:${PORT}/api/health`,
+      pid: process.pid
+    });
   });
 
   // Graceful shutdown
   process.on('SIGTERM', () => {
-    console.log('SIGTERM received, shutting down gracefully');
+    Logger.info('SIGTERM received, shutting down gracefully');
     server.close(() => {
-      console.log('Process terminated');
+      Logger.info('Server shutdown complete');
     });
   });
 
@@ -61,7 +77,10 @@ async function main() {
 }
 
 if (require.main === module) {
-  main().catch(console.error);
+  main().catch((error) => {
+    Logger.error('Failed to start server', {}, error);
+    process.exit(1);
+  });
 }
 
 module.exports = main;

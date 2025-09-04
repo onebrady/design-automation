@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { withDb } = require('../utils/database');
-const { ErrorResponse, SuccessResponse } = require('../middleware/error-handler');
+const { ErrorResponse } = require('../middleware/error-handler');
+const Logger = require('../utils/logger');
 
 // Import layout intelligence system
 let layoutIntelligence;
@@ -9,7 +9,7 @@ try {
   const { LayoutIntelligenceSystem } = require('../../../packages/layout');
   layoutIntelligence = new LayoutIntelligenceSystem();
 } catch (err) {
-  console.warn('LayoutIntelligenceSystem not available:', err.message);
+  Logger.warn('LayoutIntelligenceSystem not available', { service: 'layout' }, err);
 }
 
 // Layout template matching endpoint
@@ -44,7 +44,8 @@ router.post('/template-matches', async (req, res) => {
       }
     };
 
-    console.log('Template matching request:', {
+    Logger.info('Template matching request', {
+      operation: 'templateMatches',
       layoutType,
       analysisKeys: Object.keys(analysis),
       structureKeys: Object.keys(analysis.structure),
@@ -63,7 +64,12 @@ router.post('/template-matches', async (req, res) => {
     // Limit results
     const limitedMatches = matches.slice(0, limit);
     
-    console.log(`Found ${matches.length} matches, returning ${limitedMatches.length}`);
+    Logger.info('Template matches found', {
+      operation: 'templateMatches',
+      totalMatches: matches.length,
+      returnedMatches: limitedMatches.length,
+      limit
+    });
     
     res.json({
       matches: limitedMatches,
@@ -72,8 +78,7 @@ router.post('/template-matches', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Template matching error:', error);
-    console.error('Stack trace:', error.stack);
+    Logger.error('Template matching error', { operation: 'templateMatches', layoutType }, error);
     res.status(500).json({ 
       error: 'Template matching failed', 
       message: error.message 
@@ -172,8 +177,7 @@ router.post('/grid-recommendations', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Grid recommendations error:', error.message);
-    console.error('Grid recommendations stack:', error.stack);
+    Logger.error('Grid recommendations error', { operation: 'gridRecommendations' }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error', 
@@ -210,7 +214,7 @@ router.post('/analyze', async (req, res) => {
       ...analysis
     });
   } catch (error) {
-    console.error('Layout analysis error:', error.message);
+    Logger.error('Layout analysis error', { operation: 'analyzeLayout' }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error',
@@ -247,7 +251,7 @@ router.post('/apply-template', async (req, res) => {
       ...result
     });
   } catch (error) {
-    console.error('Template application error:', error.message);
+    Logger.error('Template application error', { operation: 'applyTemplate', templateId }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error',
@@ -280,7 +284,7 @@ router.get('/templates', async (req, res) => {
       filters
     });
   } catch (error) {
-    console.error('Template listing error:', error.message);
+    Logger.error('Template listing error', { operation: 'getTemplates', filters: { category, type } }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error',
@@ -338,7 +342,7 @@ router.post('/generate-grid', async (req, res) => {
       ...result
     });
   } catch (error) {
-    console.error('Grid generation error:', error.message);
+    Logger.error('Grid generation error', { operation: 'generateGrid', type, columns }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error',
@@ -398,7 +402,7 @@ router.post('/flexbox-analysis', async (req, res) => {
       ...analysis
     });
   } catch (error) {
-    console.error('Flexbox analysis error:', error.message);
+    Logger.error('Flexbox analysis error', { operation: 'flexboxAnalysis' }, error);
     res.status(500).json({ 
       success: false,
       error: 'processing_error',

@@ -102,7 +102,7 @@ class ErrorResponse {
    * @param {Object} res - Express response object
    * @param {Function} next - Express next function
    */
-  static handle(err, req, res, next) {
+  static handle(err, req, res, _next) {
     // Handle known error types
     if (err.code === 'EADDRINUSE') {
       return ErrorResponse.send(res, 'SERVICE_UNAVAILABLE', 'Port already in use', {
@@ -130,8 +130,14 @@ class ErrorResponse {
       });
     }
     
-    // Handle generic errors
-    console.error('Unhandled error:', err);
+    // Handle generic errors - import Logger only when needed to avoid circular deps
+    const Logger = require('../utils/logger');
+    Logger.error('Unhandled error in middleware', {
+      path: req.path,
+      method: req.method,
+      ip: req.ip
+    }, err);
+    
     return ErrorResponse.send(res, 'INTERNAL_ERROR', 'Internal server error', {
       originalError: process.env.NODE_ENV === 'development' ? err.message : undefined,
       stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
@@ -144,7 +150,7 @@ class ErrorResponse {
    * @param {Object} res - Express response object
    * @param {Function} next - Express next function
    */
-  static notFound(req, res, next) {
+  static notFound(req, res, _next) {
     return ErrorResponse.send(res, 'ENDPOINT_NOT_FOUND', `Endpoint ${req.method} ${req.path} not found`, {
       method: req.method,
       path: req.path,
