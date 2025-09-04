@@ -9,7 +9,8 @@
     "examples/*"
   ],
   "scripts": {
-    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "tests": "node scripts/discovery-tests.js || true",
     "size": "node scripts/size-baseline.js",
@@ -34,23 +35,46 @@
     "phase6:onboarding": "node scripts/onboarding.js",
     "phase6:migration": "node scripts/migration-tests.js",
     "evidence:validate": "node scripts/validate-evidence.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@playwright/test": "^1.55.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "playwright": "^1.49.0",
     "eslint": "^9.9.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.12.0",
-    "typescript": "~5.6.0",
-    "@playwright/test": "^1.49.0"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "playwright": "^1.55.0",
+    "prettier": "^3.6.2",
+    "typescript": "~5.6.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.60.0",
+    "@types/multer": "^2.0.0",
+    "chokidar": "^3.5.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.19.2",
+    "jsdom": "^26.1.0",
     "mongodb": "^6.8.0",
-    "express": "^4.19.2"
+    "multer": "^2.0.2",
+    "vm2": "^3.9.19",
+    "ws": "^8.14.2"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "**/*.{js,ts,tsx,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
