@@ -1,7 +1,7 @@
 const express = require('express');
 const { withDb } = require('../utils/database');
 const { resolveProjectContext } = require('../../../packages/discovery');
-const { enhanceCss, enhanceCached } = require('../../../packages/engine');
+const { enhanceCss, enhanceJSX, enhanceCached } = require('../../../packages/engine');
 
 const router = express.Router();
 
@@ -358,12 +358,12 @@ router.post('/enhance', async (req, res) => {
     
     console.log('Request brandPackId:', brandPackId, 'projectPath:', projectPath);
     
-    if (codeType !== 'css') {
+    if (!['css', 'jsx', 'tsx'].includes(codeType)) {
       return res.status(400).json({ 
         success: false,
         error: 'unsupported_codeType',
         message: `Code type '${codeType}' not supported`,
-        supported: ['css']
+        supported: ['css', 'jsx', 'tsx']
       });
     }
     
@@ -402,8 +402,15 @@ router.post('/enhance', async (req, res) => {
       }
     }
     
-    console.log('About to call enhanceCss with tokens keys:', Object.keys(resolvedTokens));
-    const result = enhanceCss({ code, tokens: resolvedTokens });
+    console.log('About to call enhancement with tokens keys:', Object.keys(resolvedTokens));
+    
+    let result;
+    if (codeType === 'css') {
+      result = enhanceCss({ code, tokens: resolvedTokens });
+    } else if (['jsx', 'tsx'].includes(codeType)) {
+      result = enhanceJSX({ code, tokens: resolvedTokens, filePath: `temp.${codeType}` });
+    }
+    
     console.log('Enhancement result - changes:', result.changes.length);
     
     res.json({ 
@@ -441,13 +448,13 @@ router.post('/enhance-cached', async (req, res) => {
     
     console.log('Request brandPackId:', brandPackId, 'projectPath:', projectPath);
     
-    // Support both CSS and HTML content types
-    if (!['css', 'html'].includes(codeType)) {
+    // Support CSS, HTML, JSX, and TSX content types
+    if (!['css', 'html', 'jsx', 'tsx'].includes(codeType)) {
       return res.status(400).json({ 
         success: false,
         error: 'unsupported_codeType',
         message: `Code type '${codeType}' not supported`,
-        supported: ['css', 'html']
+        supported: ['css', 'html', 'jsx', 'tsx']
       });
     }
     
@@ -485,7 +492,7 @@ router.post('/enhance-cached', async (req, res) => {
       }
     }
     
-    // Handle HTML by extracting and enhancing embedded CSS
+    // Handle different code types
     let enhancedCode = code;
     let changes = [];
     let cacheHit = false;
@@ -518,6 +525,17 @@ router.post('/enhance-cached', async (req, res) => {
           }
         }
       }
+    } else if (['jsx', 'tsx'].includes(codeType)) {
+      // JSX/TSX enhancement - direct transformation
+      const result = enhanceJSX({ 
+        code, 
+        tokens: resolvedTokens, 
+        filePath: filePath || `temp.${codeType}`,
+        maxChanges: 10
+      });
+      enhancedCode = result.code;
+      changes = result.changes || [];
+      cacheHit = false; // JSX enhancement doesn't use caching yet
     } else {
       // CSS enhancement
       const out = await enhanceCached({ 

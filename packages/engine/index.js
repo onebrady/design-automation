@@ -150,6 +150,7 @@ const { GradientSystem } = require('./gradients');
 const { StateVariationSystem } = require('./states');
 const { CompositionalTransformSystem } = require('./compositor');
 const { CSSOptimizer } = require('./optimizer');
+const { enhanceJSX, JSXEnhancer } = require('./jsx');
 
 // Advanced transformation function with all systems
 function enhanceAdvanced({ code, tokens = {}, filePath = '', options = {} }) {
@@ -198,6 +199,7 @@ function optimizeCSS({ code, level = 2, options = {} }) {
 
 module.exports = { 
   enhanceCss,
+  enhanceJSX,
   enhanceAdvanced,
   enhanceTypography,
   enhanceAnimations,
@@ -210,5 +212,6 @@ module.exports = {
   GradientSystem,
   StateVariationSystem,
   CompositionalTransformSystem,
-  CSSOptimizer
+  CSSOptimizer,
+  JSXEnhancer
 };

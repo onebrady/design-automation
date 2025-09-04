@@ -11,6 +11,18 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^0.60.0
         version: 0.60.0
+      '@babel/generator':
+        specifier: ^7.28.3
+        version: 7.28.3
+      '@babel/parser':
+        specifier: ^7.28.3
+        version: 7.28.3
+      '@babel/traverse':
+        specifier: ^7.28.3
+        version: 7.28.3
+      '@babel/types':
+        specifier: ^7.28.2
+        version: 7.28.2
       '@types/multer':
         specifier: ^2.0.0
         version: 2.0.0
