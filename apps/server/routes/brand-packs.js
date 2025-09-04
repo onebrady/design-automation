@@ -7,6 +7,7 @@ const { getRedisDataLayer, redisHealth } = require('../utils/redis');
 const { generateBrandPackFromLogo } = require('../utils/ai');
 const { upload } = require('../utils/upload');
 const { writeJsonSafe } = require('../utils/files');
+const { ErrorResponse, SuccessResponse } = require('../middleware/error-handler');
 
 // Initialize Redis data layer
 const redis = getRedisDataLayer();
@@ -19,18 +20,20 @@ router.get('/', async (req, res) => {
     
     if (redisHealthCheck.redisAvailable) {
       const items = await redis.getAllBrandPacks();
-      res.json(items);
+      return SuccessResponse.send(res, items, 'Brand packs retrieved successfully');
     } else {
       // Fallback to MongoDB
       await withDb(async (db) => {
         const cursor = db.collection('brand_packs').find({}, { projection: { _id: 0 } });
         const items = await cursor.toArray();
-        res.json(items);
+        return SuccessResponse.send(res, items, 'Brand packs retrieved successfully');
       });
     }
   } catch (error) {
     console.error('Brand packs fetch error:', error.message);
-    res.status(500).json({ error: 'fetch_failed', message: error.message });
+    return ErrorResponse.send(res, 'DATABASE_ERROR', 'Failed to fetch brand packs', {
+      originalError: error.message
+    });
   }
 });
 
@@ -39,7 +42,9 @@ router.post('/', async (req, res) => {
   try {
     const body = req.body || {};
     const id = body.id;
-    if (!id) return res.status(400).json({ error: 'invalid_request', message: 'id required' });
+    if (!id) {
+      return ErrorResponse.send(res, 'INVALID_REQUEST', 'Brand pack ID is required');
+    }
     const version = body.version || '1.0.0';
     const baseDoc = {
       id,
@@ -108,10 +113,12 @@ router.post('/', async (req, res) => {
       console.warn('Failed to write lock snapshot:', e.message);
     }
     
-    res.status(201).json({ id, version });
+    return SuccessResponse.send(res, { id, version }, 'Brand pack created successfully', 201);
   } catch (error) {
     console.error('Brand pack creation failed:', error.message);
-    res.status(500).json({ error: 'brand_pack_creation_failed', message: error.message });
+    return ErrorResponse.send(res, 'BRAND_PACK_CREATION_FAILED', 'Failed to create brand pack', {
+      originalError: error.message
+    });
   }
 });
 
@@ -125,17 +132,17 @@ router.post('/generate-from-logo', upload.single('logo'), async (req, res) => {
 
     if (!req.file) {
       console.error('No file uploaded');
-      return res.status(400).json({ error: 'invalid_request', message: 'logo file required' });
+      return ErrorResponse.send(res, 'FILE_UPLOAD_ERROR', 'Logo file is required for AI brand pack generation');
     }
 
     if (!process.env.ANTHROPIC_API_KEY) {
       console.error('ANTHROPIC_API_KEY not configured');
-      return res.status(500).json({ error: 'server_error', message: 'AI service not configured' });
+      return ErrorResponse.send(res, 'AI_SERVICE_ERROR', 'AI service not configured - ANTHROPIC_API_KEY required');
     }
 
     const { brandName, description } = req.body;
     if (!brandName) {
-      return res.status(400).json({ error: 'invalid_request', message: 'brandName required' });
+      return ErrorResponse.send(res, 'INVALID_REQUEST', 'Brand name is required for AI generation');
     }
 
     console.log('Processing file:', {
@@ -197,17 +204,14 @@ router.post('/generate-from-logo', upload.single('logo'), async (req, res) => {
       console.warn('Failed to write lock file:', lockError.message);
     }
 
-    res.status(201).json({
-      success: true,
-      brandPack: generatedBrandPack,
-      message: 'Brand pack generated successfully from logo'
-    });
+    return SuccessResponse.send(res, {
+      brandPack: generatedBrandPack
+    }, 'Brand pack generated successfully from logo', 201);
 
   } catch (error) {
     console.error('Logo generation error:', error);
-    res.status(500).json({ 
-      error: 'generation_failed', 
-      message: error.message || 'AI generation failed' 
+    return ErrorResponse.send(res, 'AI_SERVICE_ERROR', 'AI brand pack generation failed', {
+      originalError: error.message || 'AI generation failed'
     });
   }
 });

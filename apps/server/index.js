@@ -7,6 +7,7 @@ const express = require('express');
 // Import utilities and middleware
 const { corsMiddleware } = require('./middleware/cors');
 const { readJsonSafe } = require('./utils/files');
+const { ErrorResponse } = require('./middleware/error-handler');
 
 // Import route modules
 const healthRoutes = require('./routes/health');
@@ -36,14 +37,11 @@ async function main() {
   app.use('/api/design', designRoutes);
   app.use('/api/semantic', semanticRoutes);
 
-  // Error handling middleware
-  app.use((error, req, res, next) => {
-    console.error('Unhandled error:', error);
-    res.status(500).json({ 
-      error: 'internal_server_error', 
-      message: error.message 
-    });
-  });
+  // 404 handler for unknown endpoints
+  app.use(ErrorResponse.notFound);
+
+  // Global error handling middleware
+  app.use(ErrorResponse.handle);
 
   // Start server
   const server = app.listen(PORT, () => {

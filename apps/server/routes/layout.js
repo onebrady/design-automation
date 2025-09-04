@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { withDb } = require('../utils/database');
+const { ErrorResponse, SuccessResponse } = require('../middleware/error-handler');
 
 // Import layout intelligence system
 let layoutIntelligence;
@@ -16,7 +17,7 @@ router.post('/template-matches', async (req, res) => {
   try {
     const { layoutType, requirements = {}, limit = 5 } = req.body;
     if (!layoutType) {
-      return res.status(400).json({ error: 'Layout type is required' });
+      return ErrorResponse.send(res, 'INVALID_REQUEST', 'Layout type is required');
     }
 
     // Convert API parameters to analysis object expected by findTemplateMatches
