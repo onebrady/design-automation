@@ -2,6 +2,7 @@ const express = require('express');
 const { withDb } = require('../utils/database');
 const { resolveProjectContext } = require('../../../packages/discovery');
 const { enhanceCss, enhanceJSX, enhanceCached } = require('../../../packages/engine');
+const { enhanceCSSinJS } = require('../../../packages/engine/css-in-js');
 
 const router = express.Router();
 
@@ -358,12 +359,12 @@ router.post('/enhance', async (req, res) => {
     
     console.log('Request brandPackId:', brandPackId, 'projectPath:', projectPath);
     
-    if (!['css', 'jsx', 'tsx'].includes(codeType)) {
+    if (!['css', 'jsx', 'tsx', 'js'].includes(codeType)) {
       return res.status(400).json({ 
         success: false,
         error: 'unsupported_codeType',
         message: `Code type '${codeType}' not supported`,
-        supported: ['css', 'jsx', 'tsx']
+        supported: ['css', 'jsx', 'tsx', 'js']
       });
     }
     
@@ -409,6 +410,9 @@ router.post('/enhance', async (req, res) => {
       result = enhanceCss({ code, tokens: resolvedTokens });
     } else if (['jsx', 'tsx'].includes(codeType)) {
       result = enhanceJSX({ code, tokens: resolvedTokens, filePath: `temp.${codeType}` });
+    } else if (codeType === 'js') {
+      // Check if JS file contains CSS-in-JS patterns
+      result = enhanceCSSinJS({ code, tokens: resolvedTokens, filePath: 'temp.js' });
     }
     
     console.log('Enhancement result - changes:', result.changes.length);
@@ -448,13 +452,13 @@ router.post('/enhance-cached', async (req, res) => {
     
     console.log('Request brandPackId:', brandPackId, 'projectPath:', projectPath);
     
-    // Support CSS, HTML, JSX, and TSX content types
-    if (!['css', 'html', 'jsx', 'tsx'].includes(codeType)) {
+    // Support CSS, HTML, JSX, TSX, and JS content types
+    if (!['css', 'html', 'jsx', 'tsx', 'js'].includes(codeType)) {
       return res.status(400).json({ 
         success: false,
         error: 'unsupported_codeType',
         message: `Code type '${codeType}' not supported`,
-        supported: ['css', 'html', 'jsx', 'tsx']
+        supported: ['css', 'html', 'jsx', 'tsx', 'js']
       });
     }
     
@@ -536,6 +540,17 @@ router.post('/enhance-cached', async (req, res) => {
       enhancedCode = result.code;
       changes = result.changes || [];
       cacheHit = false; // JSX enhancement doesn't use caching yet
+    } else if (codeType === 'js') {
+      // JavaScript with CSS-in-JS enhancement - direct transformation
+      const result = enhanceCSSinJS({ 
+        code, 
+        tokens: resolvedTokens, 
+        filePath: filePath || 'temp.js',
+        maxChanges: 10
+      });
+      enhancedCode = result.code;
+      changes = result.changes || [];
+      cacheHit = false; // CSS-in-JS enhancement doesn't use caching yet
     } else {
       // CSS enhancement
       const out = await enhanceCached({ 
