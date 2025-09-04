@@ -7,17 +7,82 @@ try {
 }
 const { computeSignature } = require('../cache');
 
+const http = require('http');
+
+// Legacy in-memory cache for fallback
 const _cache = new Map();
+
+// Redis cache integration
+let redisDataLayer = null;
+try {
+  const { getRedisDataLayer } = require('../../apps/server/utils/redis');
+  redisDataLayer = getRedisDataLayer();
+} catch (err) {
+  console.warn('Redis not available, using in-memory cache:', err.message);
+}
+
+// Helper to make HTTP requests
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    const req = http.get(url, (res) => {
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch (err) {
+          reject(err);
+        }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(5000, () => {
+      req.destroy();
+      reject(new Error('HTTP request timeout'));
+    });
+  });
+}
 
 async function resolveProjectContext(projectPath) {
   return resolveProjectContextInner(projectPath);
 }
 
-function enhance({ code, tokens = {}, filePath = '' }) {
+async function enhance({ code, tokens = {}, filePath = '', projectPath = process.cwd() }) {
+  // Auto-resolve brand pack tokens if not provided
+  if (!Object.keys(tokens).length) {
+    try {
+      const context = await resolveProjectContext(projectPath);
+      if (context.brandPack?.id) {
+        // Make API call to get brand pack tokens rather than duplicating MongoDB logic
+        const data = await httpGet(`http://localhost:8901/api/brand-packs/${context.brandPack.id}/export/json`);
+        tokens = data.tokens || {};
+      }
+    } catch (err) {
+      console.warn('Could not resolve brand pack tokens for enhance:', err.message);
+    }
+  }
+  
   return enhanceCss({ code, tokens, filePath });
 }
 
-function enhanceCached({ code, tokens = {}, filePath = '', brandPackId = '', brandVersion = '', engineVersion = '1.0.0', rulesetVersion = '1.0.0', overridesHash = '', componentType = '', envFlags = {} }) {
+async function enhanceCached({ code, tokens = {}, filePath = '', brandPackId = '', brandVersion = '', engineVersion = '1.0.0', rulesetVersion = '1.0.0', overridesHash = '', componentType = '', envFlags = {}, projectPath = process.cwd() }) {
+  // Auto-resolve brand pack tokens if not provided
+  if (!Object.keys(tokens).length) {
+    try {
+      const context = await resolveProjectContext(projectPath);
+      if (context.brandPack?.id) {
+        brandPackId = brandPackId || context.brandPack.id;
+        brandVersion = brandVersion || context.brandPack.version;
+        
+        // Make API call to get brand pack tokens
+        const data = await httpGet(`http://localhost:8901/api/brand-packs/${context.brandPack.id}/export/json`);
+        tokens = data.tokens || {};
+      }
+    } catch (err) {
+      console.warn('Could not resolve brand pack tokens for enhanceCached:', err.message);
+    }
+  }
+
   const signature = computeSignature({ code, filePath, brandPackId, brandVersion, engineVersion, rulesetVersion, overridesHash, componentType, envFlags });
   const cached = _cache.get(signature);
   if (cached) {
