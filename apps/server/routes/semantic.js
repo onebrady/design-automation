@@ -18,14 +18,14 @@ try {
 router.post('/detect-component-type', async (req, res) => {
   try {
     const { html, context, options } = req.body;
-    
+
     // Validate required parameters
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'missing_field', 
+        error: 'missing_field',
         message: 'HTML is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -35,7 +35,7 @@ router.post('/detect-component-type', async (req, res) => {
         success: false,
         error: 'invalid_format',
         message: 'Context must be an object',
-        details: { field: 'context', expected: 'object' }
+        details: { field: 'context', expected: 'object' },
       });
     }
 
@@ -45,7 +45,7 @@ router.post('/detect-component-type', async (req, res) => {
         success: false,
         error: 'invalid_format',
         message: 'Options must be an object',
-        details: { field: 'options', expected: 'object' }
+        details: { field: 'options', expected: 'object' },
       });
     }
 
@@ -54,19 +54,19 @@ router.post('/detect-component-type', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     // Detect component type
     const componentType = await semanticSystem.detectComponentType(html, context);
-    
+
     // Add additional analysis if options request it
     const result = {
       success: true,
       type: componentType.type,
       confidence: componentType.confidence,
-      metadata: componentType.metadata || {}
+      metadata: componentType.metadata || {},
     };
 
     if (options?.detectVariants) {
@@ -77,7 +77,7 @@ router.post('/detect-component-type', async (req, res) => {
       result.accessibility = componentType.accessibility || {
         score: 'B',
         issues: [],
-        suggestions: []
+        suggestions: [],
       };
     }
 
@@ -86,14 +86,13 @@ router.post('/detect-component-type', async (req, res) => {
     }
 
     res.json(result);
-
   } catch (error) {
     console.error('Component type detection error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Component type detection failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Component type detection failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -102,14 +101,14 @@ router.post('/detect-component-type', async (req, res) => {
 router.post('/batch-analyze', async (req, res) => {
   try {
     const { files, options, projectPath } = req.body;
-    
+
     // Validate required parameters
     if (!files) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'missing_field', 
+        error: 'missing_field',
         message: 'Files array is required',
-        details: { field: 'files' }
+        details: { field: 'files' },
       });
     }
 
@@ -119,7 +118,7 @@ router.post('/batch-analyze', async (req, res) => {
         success: false,
         error: 'invalid_format',
         message: 'Files must be an array',
-        details: { field: 'files', expected: 'array' }
+        details: { field: 'files', expected: 'array' },
       });
     }
 
@@ -131,7 +130,7 @@ router.post('/batch-analyze', async (req, res) => {
           success: false,
           error: 'missing_field',
           message: `File at index ${i} is missing path`,
-          details: { field: `files[${i}].path` }
+          details: { field: `files[${i}].path` },
         });
       }
       if (!file.html) {
@@ -139,7 +138,7 @@ router.post('/batch-analyze', async (req, res) => {
           success: false,
           error: 'missing_field',
           message: `File at index ${i} is missing HTML content`,
-          details: { field: `files[${i}].html` }
+          details: { field: `files[${i}].html` },
         });
       }
     }
@@ -150,7 +149,7 @@ router.post('/batch-analyze', async (req, res) => {
         success: false,
         error: 'invalid_format',
         message: 'Options must be an object',
-        details: { field: 'options', expected: 'object' }
+        details: { field: 'options', expected: 'object' },
       });
     }
 
@@ -159,21 +158,24 @@ router.post('/batch-analyze', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     // Perform batch analysis
     const results = await semanticSystem.batchAnalyze(files, options || {});
-    
+
     // Add summary information - ensure results is an array
     const resultsArray = Array.isArray(results) ? results : [results];
     const summary = {
       totalFiles: files.length,
       processedFiles: resultsArray.length,
-      averageScore: resultsArray.length > 0 ? resultsArray.reduce((sum, r) => sum + (r.score?.numeric || 0), 0) / resultsArray.length : 0,
+      averageScore:
+        resultsArray.length > 0
+          ? resultsArray.reduce((sum, r) => sum + (r.score?.numeric || 0), 0) / resultsArray.length
+          : 0,
       commonIssues: [], // TODO: Extract common issues across files
-      processingTime: results.processingTime || '0ms'
+      processingTime: results.processingTime || '0ms',
     };
 
     res.json({
@@ -183,18 +185,20 @@ router.post('/batch-analyze', async (req, res) => {
       projectPath,
       performance: {
         filesProcessed: resultsArray.length,
-        averageTimePerFile: resultsArray.length > 0 ? `${(results.processingTime || 0) / resultsArray.length}ms` : '0ms',
-        totalTime: `${results.processingTime || 0}ms`
-      }
+        averageTimePerFile:
+          resultsArray.length > 0
+            ? `${(results.processingTime || 0) / resultsArray.length}ms`
+            : '0ms',
+        totalTime: `${results.processingTime || 0}ms`,
+      },
     });
-
   } catch (error) {
     console.error('Batch analysis error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Batch analysis failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Batch analysis failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -203,14 +207,14 @@ router.post('/batch-analyze', async (req, res) => {
 router.post('/analyze', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     // Validate required parameters
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'missing_field', 
+        error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -219,22 +223,22 @@ router.post('/analyze', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const analysis = await semanticSystem.analyze(html, options);
     res.json({
       success: true,
-      ...analysis
+      ...analysis,
     });
   } catch (error) {
     console.error('Semantic analysis error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Semantic analysis failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Semantic analysis failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -243,13 +247,13 @@ router.post('/analyze', async (req, res) => {
 router.post('/detect-components', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -257,22 +261,22 @@ router.post('/detect-components', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const components = await semanticSystem.detectComponents(html, options);
     res.json({
       success: true,
-      components: components || []
+      components: components || [],
     });
   } catch (error) {
     console.error('Component detection error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Component detection failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Component detection failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -281,13 +285,13 @@ router.post('/detect-components', async (req, res) => {
 router.post('/analyze-accessibility', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -295,22 +299,22 @@ router.post('/analyze-accessibility', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const accessibility = await semanticSystem.analyzeAccessibility(html, options);
     res.json({
       success: true,
-      ...accessibility
+      ...accessibility,
     });
   } catch (error) {
     console.error('Accessibility analysis error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Accessibility analysis failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Accessibility analysis failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -319,13 +323,13 @@ router.post('/analyze-accessibility', async (req, res) => {
 router.post('/generate-aria', async (req, res) => {
   try {
     const { html, componentAnalysis, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -333,22 +337,26 @@ router.post('/generate-aria', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
-    const enhancements = await semanticSystem.generateAriaEnhancements(html, componentAnalysis, options);
+    const enhancements = await semanticSystem.generateAriaEnhancements(
+      html,
+      componentAnalysis,
+      options
+    );
     res.json({
       success: true,
-      enhancements: enhancements || []
+      enhancements: enhancements || [],
     });
   } catch (error) {
     console.error('ARIA generation error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'ARIA generation failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'ARIA generation failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -357,13 +365,13 @@ router.post('/generate-aria', async (req, res) => {
 router.post('/enhance-html', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -371,22 +379,22 @@ router.post('/enhance-html', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const enhanced = await semanticSystem.getEnhancedHtml(html, options);
     res.json({
       success: true,
-      ...enhanced
+      ...enhanced,
     });
   } catch (error) {
     console.error('HTML enhancement error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'HTML enhancement failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'HTML enhancement failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -395,13 +403,13 @@ router.post('/enhance-html', async (req, res) => {
 router.post('/component-relationships', async (req, res) => {
   try {
     const { html, componentAnalysis, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -409,22 +417,25 @@ router.post('/component-relationships', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
-    const relationships = await semanticSystem.analyzeComponentRelationships(html, componentAnalysis);
+    const relationships = await semanticSystem.analyzeComponentRelationships(
+      html,
+      componentAnalysis
+    );
     res.json({
       success: true,
-      relationships: relationships || []
+      relationships: relationships || [],
     });
   } catch (error) {
     console.error('Component relationships error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Component relationships analysis failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Component relationships analysis failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -433,13 +444,13 @@ router.post('/component-relationships', async (req, res) => {
 router.post('/score', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -447,22 +458,22 @@ router.post('/score', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const score = await semanticSystem.getSemanticScore(html, options);
     res.json({
       success: true,
-      ...score
+      ...score,
     });
   } catch (error) {
     console.error('Semantic score error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Semantic score calculation failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Semantic score calculation failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -471,13 +482,13 @@ router.post('/score', async (req, res) => {
 router.post('/recommendations', async (req, res) => {
   try {
     const { html, options = {} } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -485,22 +496,22 @@ router.post('/recommendations', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const recommendations = await semanticSystem.getRecommendations(html, options);
     res.json({
       success: true,
-      recommendations: recommendations || []
+      recommendations: recommendations || [],
     });
   } catch (error) {
     console.error('Recommendations error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Recommendations generation failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Recommendations generation failed',
+      details: { originalError: error.message },
     });
   }
 });
@@ -509,13 +520,13 @@ router.post('/recommendations', async (req, res) => {
 router.post('/quick-accessibility-check', async (req, res) => {
   try {
     const { html } = req.body;
-    
+
     if (!html) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         error: 'missing_field',
         message: 'HTML content is required',
-        details: { field: 'html' }
+        details: { field: 'html' },
       });
     }
 
@@ -523,22 +534,152 @@ router.post('/quick-accessibility-check', async (req, res) => {
       return res.status(500).json({
         success: false,
         error: 'service_unavailable',
-        message: 'Semantic analysis service is not available'
+        message: 'Semantic analysis service is not available',
       });
     }
 
     const check = await semanticSystem.quickAccessibilityCheck(html);
     res.json({
       success: true,
-      ...check
+      ...check,
     });
   } catch (error) {
     console.error('Quick accessibility check error:', error.message);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'processing_error', 
-      message: 'Quick accessibility check failed', 
-      details: { originalError: error.message }
+      error: 'processing_error',
+      message: 'Quick accessibility check failed',
+      details: { originalError: error.message },
+    });
+  }
+});
+
+// === ADDITIONAL SEMANTIC ENDPOINTS FROM BACKUP ===
+
+// Analyze context for focused elements
+router.post('/analyze-context', async (req, res) => {
+  try {
+    const { html, focusSelector } = req.body;
+    if (!html) {
+      return res.status(400).json({
+        success: false,
+        error: 'missing_field',
+        message: 'HTML content is required',
+        details: { field: 'html' },
+      });
+    }
+
+    if (!semanticSystem) {
+      return res.status(503).json({
+        success: false,
+        error: 'service_unavailable',
+        message: 'Semantic analysis system not available',
+      });
+    }
+
+    const context = await semanticSystem.analyzeContext(html, focusSelector);
+    res.json({
+      success: true,
+      context,
+    });
+  } catch (error) {
+    console.error('Context analysis error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'processing_error',
+      message: 'Context analysis failed',
+      details: { originalError: error.message },
+    });
+  }
+});
+
+// Generate comprehensive accessibility report
+router.post('/accessibility-report', async (req, res) => {
+  try {
+    const { html, options = {} } = req.body;
+    if (!html) {
+      return res.status(400).json({
+        success: false,
+        error: 'missing_field',
+        message: 'HTML content is required',
+        details: { field: 'html' },
+      });
+    }
+
+    if (!semanticSystem) {
+      return res.status(503).json({
+        success: false,
+        error: 'service_unavailable',
+        message: 'Semantic analysis system not available',
+      });
+    }
+
+    const report = await semanticSystem.generateAccessibilityReport(html, options);
+    res.json({
+      success: true,
+      report,
+    });
+  } catch (error) {
+    console.error('Accessibility report error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'processing_error',
+      message: 'Accessibility report generation failed',
+      details: { originalError: error.message },
+    });
+  }
+});
+
+// Get system statistics
+router.get('/stats', async (req, res) => {
+  try {
+    if (!semanticSystem) {
+      return res.status(503).json({
+        success: false,
+        error: 'service_unavailable',
+        message: 'Semantic analysis system not available',
+      });
+    }
+
+    const stats = semanticSystem.getSystemStats();
+    res.json({
+      success: true,
+      stats,
+    });
+  } catch (error) {
+    console.error('System stats error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'processing_error',
+      message: 'System stats retrieval failed',
+      details: { originalError: error.message },
+    });
+  }
+});
+
+// Clear semantic analysis cache
+router.delete('/cache', async (req, res) => {
+  try {
+    if (!semanticSystem) {
+      return res.status(503).json({
+        success: false,
+        error: 'service_unavailable',
+        message: 'Semantic analysis system not available',
+      });
+    }
+
+    semanticSystem.clearCache();
+    res.json({
+      success: true,
+      message: 'Cache cleared successfully',
+    });
+  } catch (error) {
+    console.error('Cache clear error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'processing_error',
+      message: 'Cache clear failed',
+      details: { originalError: error.message },
     });
   }
 });

@@ -70,6 +70,7 @@
     "@babel/traverse": "^7.28.3",
     "@babel/types": "^7.28.2",
     "@types/multer": "^2.0.0",
+    "axios": "^1.11.0",
     "chokidar": "^3.5.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
@@ -78,6 +79,7 @@
     "jsdom": "^26.1.0",
     "mongodb": "^6.8.0",
     "multer": "^2.0.2",
+    "openai": "^5.19.1",
     "vm2": "^3.9.19",
     "winston": "^3.17.0",
     "ws": "^8.14.2"

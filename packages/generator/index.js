@@ -38,26 +38,32 @@ class ComponentGenerator {
     componentType = 'component',
     style = 'modern',
     framework = 'html',
-    brandPackId = null
+    brandPackId = null,
   }) {
     const prompt = this.buildGenerationPrompt({
       description,
       componentType,
       style,
       framework,
-      brandTokens: this.brandTokens
+      brandTokens: this.brandTokens,
     });
 
     try {
       const response = await this.callClaudeAPI(prompt);
       const component = this.parseComponentResponse(response);
-      
+
       return {
         success: true,
         component,
         framework,
         timestamp: new Date().toISOString(),
-        cacheKey: this.generateCacheKey({ description, componentType, style, framework, brandPackId })
+        cacheKey: this.generateCacheKey({
+          description,
+          componentType,
+          style,
+          framework,
+          brandPackId,
+        }),
       };
     } catch (error) {
       // Fallback to template library
@@ -70,11 +76,11 @@ class ComponentGenerator {
     templateId = null,
     componentType = 'button',
     style = 'modern',
-    framework = 'html'
+    framework = 'html',
   }) {
-    const template = templateId ? 
-      this.templates.get(templateId) : 
-      this.findTemplateByType(componentType);
+    const template = templateId
+      ? this.templates.get(templateId)
+      : this.findTemplateByType(componentType);
 
     if (!template) {
       throw new Error(`Template not found for component type: ${componentType}`);
@@ -87,7 +93,7 @@ class ComponentGenerator {
       framework,
       source: 'template',
       templateId: template.id,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -102,28 +108,203 @@ class ComponentGenerator {
       ...template,
       ...customizations,
       customized: true,
-      originalId: templateId
+      originalId: templateId,
     };
 
     return this.applyBrandTokens(customized, this.brandTokens);
   }
 
-  // List available templates
-  listTemplates() {
-    return Array.from(this.templates.values()).map(template => ({
+  // List available templates with filtering, pagination, and comprehensive metadata
+  listTemplates(options = {}) {
+    const { type, style, framework, search, limit = 20, offset = 0 } = options;
+
+    // Get all templates with enhanced metadata
+    let allTemplates = Array.from(this.templates.values()).map((template) => {
+      return this._enhanceTemplateMetadata(template);
+    });
+
+    // Apply filters
+    if (type) {
+      allTemplates = allTemplates.filter((t) => t.type === type);
+    }
+
+    if (style) {
+      allTemplates = allTemplates.filter((t) => t.style === style);
+    }
+
+    if (framework) {
+      allTemplates = allTemplates.filter((t) => t.frameworks.includes(framework));
+    }
+
+    if (search) {
+      const searchLower = search.toLowerCase();
+      allTemplates = allTemplates.filter(
+        (t) =>
+          t.name.toLowerCase().includes(searchLower) ||
+          t.description.toLowerCase().includes(searchLower) ||
+          t.tags.some((tag) => tag.toLowerCase().includes(searchLower))
+      );
+    }
+
+    // Calculate pagination
+    const total = allTemplates.length;
+    const paginatedTemplates = allTemplates.slice(offset, offset + limit);
+    const hasMore = offset + limit < total;
+
+    return {
+      templates: paginatedTemplates,
+      total,
+      pagination: {
+        limit,
+        offset,
+        hasMore,
+        nextPage: hasMore ? `/api/design/templates?limit=${limit}&offset=${offset + limit}` : null,
+      },
+      filters: {
+        availableTypes: this._getAvailableTypes(),
+        availableStyles: this._getAvailableStyles(),
+        availableFrameworks: this._getAvailableFrameworks(),
+      },
+    };
+  }
+
+  // Enhance template with comprehensive metadata
+  _enhanceTemplateMetadata(template) {
+    return {
       id: template.id,
       name: template.name,
-      type: template.type,
       description: template.description,
-      preview: template.preview || null
-    }));
+      type: template.type,
+      style: this._determineStyle(template),
+      preview: this._generatePreviewImage(template),
+      previewUrl: `/api/design/templates/${template.id}/preview`,
+      tokens: template.tokens || [],
+      frameworks: this._getFrameworks(template),
+      complexity: this._calculateComplexity(template),
+      tags: this._generateTags(template),
+      accessibility: 'AA',
+      brandCompliance: this._calculateBrandCompliance(template),
+      popularity: this._calculatePopularity(template),
+      lastUpdated: new Date().toISOString(),
+    };
+  }
+
+  // Determine template style based on characteristics
+  _determineStyle(template) {
+    const name = template.name.toLowerCase();
+    const desc = template.description.toLowerCase();
+
+    if (name.includes('minimal') || desc.includes('minimal')) return 'minimal';
+    if (name.includes('playful') || desc.includes('playful')) return 'playful';
+    if (name.includes('professional') || desc.includes('professional')) return 'professional';
+    return 'modern'; // default
+  }
+
+  // Generate preview image (SVG data URI)
+  _generatePreviewImage(template) {
+    // Generate a simple SVG preview based on template type
+    const svgContent = this._createTemplateSvg(template);
+    return `data:image/svg+xml;base64,${Buffer.from(svgContent).toString('base64')}`;
+  }
+
+  // Create SVG representation of template
+  _createTemplateSvg(template) {
+    const width = template.type === 'card' ? 300 : 200;
+    const height = template.type === 'card' ? 200 : 80;
+
+    return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f8fafc" stroke="#e2e8f0" rx="8"/>
+      <text x="50%" y="50%" text-anchor="middle" font-family="system-ui" font-size="14" fill="#374151">
+        ${template.name}
+      </text>
+    </svg>`;
+  }
+
+  // Determine available frameworks for template
+  _getFrameworks(template) {
+    const frameworks = ['html'];
+    if (template.jsx) frameworks.push('react');
+    if (template.vue) frameworks.push('vue');
+    if (template.svelte) frameworks.push('svelte');
+    return frameworks;
+  }
+
+  // Calculate template complexity
+  _calculateComplexity(template) {
+    const tokenCount = (template.tokens || []).length;
+    const hasVariants = template.variants && Object.keys(template.variants).length > 0;
+    const slotCount = (template.slots || []).length;
+
+    if (tokenCount > 8 || hasVariants || slotCount > 3) return 'complex';
+    if (tokenCount > 4 || slotCount > 1) return 'medium';
+    return 'simple';
+  }
+
+  // Generate relevant tags for template
+  _generateTags(template) {
+    const tags = [];
+    const type = template.type.toLowerCase();
+    const name = template.name.toLowerCase();
+    const desc = template.description.toLowerCase();
+
+    // Type-based tags
+    if (type === 'button') {
+      tags.push('interactive', 'form-control');
+      if (name.includes('primary') || desc.includes('primary')) tags.push('primary', 'cta');
+      if (name.includes('secondary')) tags.push('secondary');
+    } else if (type === 'card') {
+      tags.push('content', 'layout');
+      if (desc.includes('elevation') || desc.includes('shadow')) tags.push('elevated');
+    } else if (type === 'form') {
+      tags.push('input', 'form-control', 'interactive');
+    }
+
+    return tags;
+  }
+
+  // Calculate brand compliance score
+  _calculateBrandCompliance(template) {
+    const tokenCount = (template.tokens || []).length;
+    const hasColorTokens = (template.tokens || []).some((token) => token.includes('color'));
+    const hasSpacingTokens = (template.tokens || []).some((token) => token.includes('spacing'));
+
+    let score = 0.7; // base score
+    if (tokenCount > 3) score += 0.1;
+    if (hasColorTokens) score += 0.1;
+    if (hasSpacingTokens) score += 0.1;
+
+    return Math.min(score, 0.98); // cap at 0.98
+  }
+
+  // Calculate popularity score (mock data based on template characteristics)
+  _calculatePopularity(template) {
+    const popularTypes = { button: 0.9, card: 0.8, form: 0.7 };
+    const basePopularity = popularTypes[template.type] || 0.6;
+    const randomVariation = (Math.random() - 0.5) * 0.2; // +/- 0.1
+    return Math.max(0.1, Math.min(0.95, basePopularity + randomVariation));
+  }
+
+  // Get all available template types
+  _getAvailableTypes() {
+    return [...new Set(Array.from(this.templates.values()).map((t) => t.type))];
+  }
+
+  // Get all available styles
+  _getAvailableStyles() {
+    return ['modern', 'minimal', 'playful', 'professional'];
+  }
+
+  // Get all available frameworks
+  _getAvailableFrameworks() {
+    return ['html', 'react', 'vue', 'svelte'];
   }
 
   // Build Claude API prompt for component generation
   buildGenerationPrompt({ description, componentType, style, framework, brandTokens }) {
-    const tokenContext = Object.keys(brandTokens).length > 0 ? 
-      `Use these brand tokens: ${JSON.stringify(brandTokens, null, 2)}` : 
-      'Use semantic color names and modern spacing values.';
+    const tokenContext =
+      Object.keys(brandTokens).length > 0
+        ? `Use these brand tokens: ${JSON.stringify(brandTokens, null, 2)}`
+        : 'Use semantic color names and modern spacing values.';
 
     return `You are an expert frontend developer. Generate a ${componentType} component based on this description: "${description}"
 
@@ -152,7 +333,7 @@ Generate the component:`;
     const payload = JSON.stringify({
       model: 'claude-3-5-sonnet-20241022',
       max_tokens: 4000,
-      messages: [{ role: 'user', content: prompt }]
+      messages: [{ role: 'user', content: prompt }],
     });
 
     const options = {
@@ -164,14 +345,14 @@ Generate the component:`;
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(payload),
         'x-api-key': this.apiKey,
-        'anthropic-version': '2023-06-01'
-      }
+        'anthropic-version': '2023-06-01',
+      },
     };
 
     return new Promise((resolve, reject) => {
       const req = https.request(options, (res) => {
         let data = '';
-        res.on('data', chunk => data += chunk);
+        res.on('data', (chunk) => (data += chunk));
         res.on('end', () => {
           try {
             const result = JSON.parse(data);
@@ -185,7 +366,7 @@ Generate the component:`;
           }
         });
       });
-      
+
       req.on('error', reject);
       req.write(payload);
       req.end();
@@ -204,7 +385,7 @@ Generate the component:`;
       return {
         html: response.includes('<') ? response : `<div class="component">${response}</div>`,
         css: '',
-        framework: 'html'
+        framework: 'html',
       };
     }
   }

@@ -18,34 +18,36 @@ const brandPackRoutes = require('./routes/brand-packs');
 const layoutRoutes = require('./routes/layout');
 const designRoutes = require('./routes/design');
 const semanticRoutes = require('./routes/semantic');
+const visualRoutes = require('./routes/visual');
 
 const PORT = process.env.PORT || 8901;
 
 async function main() {
   const app = express();
-  
+
   // Basic middleware
   app.use(express.json());
   app.use(corsMiddleware);
-  
+
   // Logging middleware (with health check filtering)
   app.use(healthCheckFilter);
-  
+
   const pkg = readJsonSafe(path.join(process.cwd(), 'package.json')) || { version: '0.0.0' };
   Logger.info('Starting Agentic Design API Server', {
     version: pkg.version,
     port: PORT,
     nodeEnv: process.env.NODE_ENV || 'development',
-    logLevel: process.env.LOG_LEVEL || 'debug'
+    logLevel: process.env.LOG_LEVEL || 'debug',
   });
 
   // Mount route modules
   app.use('/api', healthRoutes);
-  app.use('/api', configRoutes);  
+  app.use('/api', configRoutes);
   app.use('/api/brand-packs', brandPackRoutes);
   app.use('/api/layout', layoutRoutes);
   app.use('/api/design', designRoutes);
   app.use('/api/semantic', semanticRoutes);
+  app.use('/api/visual', visualRoutes);
 
   // 404 handler for unknown endpoints
   app.use(ErrorResponse.notFound);
@@ -61,7 +63,7 @@ async function main() {
     Logger.info('Server started successfully', {
       port: PORT,
       healthCheck: `http://localhost:${PORT}/api/health`,
-      pid: process.pid
+      pid: process.pid,
     });
   });
 

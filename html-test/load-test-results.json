@@ -1,0 +1,57 @@
+{
+  "testConfig": {
+    "baseUrl": "http://localhost:8901",
+    "maxConcurrentUsers": 50,
+    "testDurationMs": 60000,
+    "warmupRequests": 10,
+    "endpoints": [
+      {
+        "path": "/api/health",
+        "method": "GET",
+        "weight": 1
+      },
+      {
+        "path": "/api/brand-packs",
+        "method": "GET",
+        "weight": 3
+      },
+      {
+        "path": "/api/context",
+        "method": "GET",
+        "weight": 2
+      }
+    ],
+    "brandPackCreate": {
+      "path": "/api/brand-packs",
+      "method": "POST",
+      "body": {
+        "id": "load-test-brand-1756998260495",
+        "name": "Load Test Brand",
+        "version": "1.0.0",
+        "description": "Generated during load testing",
+        "tokens": {
+          "colors": {
+            "primary": "#1B3668",
+            "secondary": "#2A4F8F"
+          }
+        }
+      }
+    }
+  },
+  "stats": {
+    "totalRequests": 2901,
+    "successfulRequests": 2901,
+    "failedRequests": 0,
+    "errorRate": "0.00%",
+    "avgResponseTime": "5.85ms",
+    "minResponseTime": "2.96ms",
+    "maxResponseTime": "31.50ms",
+    "p50": "5.48ms",
+    "p95": "8.83ms",
+    "p99": "12.05ms",
+    "requestsPerSecond": "43.70"
+  },
+  "duration": 66.388,
+  "timestamp": "2025-09-04T15:05:26.948Z",
+  "errors": []
+}
